@@ -6,7 +6,7 @@
 
 
  CONSTRAINT [PK_cart] PRIMARY KEY CLUSTERED ([cart_id] ASC),
- CONSTRAINT [FK_66] FOREIGN KEY ([cart_status_id])  REFERENCES [dbo].[cart_status]([cart_status_id])
+ CONSTRAINT [FK_dbo_cart_dbo_cart_status] FOREIGN KEY ([cart_status_id])  REFERENCES [dbo].[cart_status]([cart_status_id])
 );
 GO
 

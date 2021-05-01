@@ -7,8 +7,8 @@
 
 
  CONSTRAINT [PK_order] PRIMARY KEY CLUSTERED ([order_id] ASC),
- CONSTRAINT [FK_52] FOREIGN KEY ([cart_id])  REFERENCES [dbo].[cart]([cart_id]),
- CONSTRAINT [FK_74] FOREIGN KEY ([order_status_id])  REFERENCES [dbo].[order_status]([order_status_id])
+ CONSTRAINT [FK_dbo_order_dbo_cart] FOREIGN KEY ([cart_id])  REFERENCES [dbo].[cart]([cart_id]),
+ CONSTRAINT [FK_dbo_order_dbo_order_status] FOREIGN KEY ([order_status_id])  REFERENCES [dbo].[order_status]([order_status_id])
 );
 GO
 

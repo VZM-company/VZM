@@ -12,8 +12,8 @@
 
 
  CONSTRAINT [PK_product] PRIMARY KEY CLUSTERED ([product_id] ASC),
- CONSTRAINT [FK_58] FOREIGN KEY ([cart_id])  REFERENCES [dbo].[cart]([cart_id]),
- CONSTRAINT [FK_95] FOREIGN KEY ([seller_id])  REFERENCES [dbo].[user]([user_id])
+ CONSTRAINT [FK_dbo_product_dbo_cart] FOREIGN KEY ([cart_id])  REFERENCES [dbo].[cart]([cart_id]),
+ CONSTRAINT [FK_dbo_product_dbo_user] FOREIGN KEY ([seller_id])  REFERENCES [dbo].[user]([user_id])
 );
 GO
 

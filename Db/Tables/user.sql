@@ -12,7 +12,7 @@
 
 
  CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED ([user_id] ASC),
- CONSTRAINT [FK_92] FOREIGN KEY ([role_id])  REFERENCES [dbo].[role]([role_id])
+ CONSTRAINT [FK_dbo_user_dbo_role] FOREIGN KEY ([role_id])  REFERENCES [dbo].[role]([role_id])
 );
 GO
 

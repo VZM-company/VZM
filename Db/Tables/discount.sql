@@ -8,7 +8,7 @@
 
 
  CONSTRAINT [PK_discount] PRIMARY KEY CLUSTERED ([discount_id] ASC),
- CONSTRAINT [FK_38] FOREIGN KEY ([product_id])  REFERENCES [dbo].[product]([product_id]),
+ CONSTRAINT [FK_dbo_discount_dbo_product] FOREIGN KEY ([product_id])  REFERENCES [dbo].[product]([product_id]),
 );
 GO
 

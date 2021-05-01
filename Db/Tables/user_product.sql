@@ -5,8 +5,8 @@
 
 
  CONSTRAINT [PK_user_product] PRIMARY KEY CLUSTERED ([product_id] ASC, [user_id] ASC),
- CONSTRAINT [FK_116] FOREIGN KEY ([product_id])  REFERENCES [dbo].[product]([product_id]),
- CONSTRAINT [FK_120] FOREIGN KEY ([user_id])  REFERENCES [dbo].[user]([user_id])
+ CONSTRAINT [FK_dbo_user_product_dbo_product] FOREIGN KEY ([product_id])  REFERENCES [dbo].[product]([product_id]),
+ CONSTRAINT [FK_dbo_user_product_dbo_user] FOREIGN KEY ([user_id])  REFERENCES [dbo].[user]([user_id])
 );
 GO
 
