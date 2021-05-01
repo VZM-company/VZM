@@ -13,9 +13,8 @@
 GO
 
 
-CREATE NONCLUSTERED INDEX [fkIdx_113] ON [dbo].[category] 
+CREATE NONCLUSTERED INDEX [IX_dbo_category_Parentcategory_id] ON [dbo].[category] 
  (
   [Parentcategory_id] ASC
  )
-
 GO

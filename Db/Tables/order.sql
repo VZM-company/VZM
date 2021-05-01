@@ -13,16 +13,14 @@
 GO
 
 
-CREATE NONCLUSTERED INDEX [fkIdx_53] ON [dbo].[order] 
+CREATE NONCLUSTERED INDEX [IX_dbo_order_cart_id] ON [dbo].[order] 
  (
   [cart_id] ASC
  )
-
 GO
 
-CREATE NONCLUSTERED INDEX [fkIdx_75] ON [dbo].[order] 
+CREATE NONCLUSTERED INDEX [IX_dbo_order_order_status_id] ON [dbo].[order] 
  (
   [order_status_id] ASC
  )
-
 GO

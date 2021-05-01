@@ -11,16 +11,14 @@
 GO
 
 
-CREATE NONCLUSTERED INDEX [fkIdx_106] ON [dbo].[product_category] 
+CREATE NONCLUSTERED INDEX [IX_dbo_product_category_category_id] ON [dbo].[product_category] 
  (
   [category_id] ASC
  )
-
 GO
 
-CREATE NONCLUSTERED INDEX [fkIdx_110] ON [dbo].[product_category] 
+CREATE NONCLUSTERED INDEX [IX_dbo_product_category_product_id] ON [dbo].[product_category] 
  (
   [product_id] ASC
  )
-
 GO

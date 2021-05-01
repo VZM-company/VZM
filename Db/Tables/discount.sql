@@ -13,9 +13,8 @@
 GO
 
 
-CREATE NONCLUSTERED INDEX [fkIdx_39] ON [dbo].[discount] 
+CREATE NONCLUSTERED INDEX [IX_dbo_discount_product_id] ON [dbo].[discount] 
  (
   [product_id] ASC
  )
-
 GO

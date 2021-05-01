@@ -17,9 +17,8 @@
 GO
 
 
-CREATE NONCLUSTERED INDEX [fkIdx_93] ON [dbo].[user] 
+CREATE NONCLUSTERED INDEX [IX_dbo_user_role_id] ON [dbo].[user] 
  (
   [role_id] ASC
  )
-
 GO
