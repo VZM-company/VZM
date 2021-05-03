@@ -7,8 +7,8 @@
  [created_at]        datetime NOT NULL ,
  [description]       text NOT NULL ,
  [description_short] varchar(50) NOT NULL ,
- [cart_id]           int NOT NULL ,
- [seller_id]         int NOT NULL ,
+ [cart_id]           int NULL ,
+ [seller_id]         int NULL ,
 
 
  CONSTRAINT [PK_product] PRIMARY KEY CLUSTERED ([product_id] ASC),
