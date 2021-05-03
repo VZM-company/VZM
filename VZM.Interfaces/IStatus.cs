@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VZM.Entities;
 
 namespace VZM.Interfaces
 {
     public interface IStatus
     {
-        public Status GetCartStatus(ICart cart);
+        public CartStatus GetCartStatus(ICart cart);
     }
 }
