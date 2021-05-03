@@ -12,21 +12,23 @@ export class HomeComponent implements OnInit {
     left: 10,
     discount: 101
   }, {
-      name: "rewfasdv",
-      price: 121,
-      left: 10,
-      discount: 1401
-    }, {
-      name: "aegaerg",
-      price: 152,
-      left: 10,
-      discount: 101
-    }, {
-      name: "asfawer",
-      price: 412,
-      left: 103,
-      discount: 1601
-    }]
+    name: "rewfasdv",
+    price: 121,
+    left: 10,
+    discount: 1401
+  }, {
+    name: "aegaerg",
+    price: 152,
+    left: 10,
+    discount: 101
+  }, {
+    name: "asfawer",
+    price: 412,
+    left: 103,
+    discount: 1601
+    }];
+
+  items_other = this.items;
 
   constructor(
 

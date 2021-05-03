@@ -1,0 +1,26 @@
+<section>
+  <mat-card class="app__images">
+    <!--<img src="#" alt="Alternate Text" />-->
+    <div class="app__image" *ngFor="let image of app.images">
+      some picture
+    </div>
+  </mat-card>
+</section>
+<section class="app__detail">
+  <article class="detail__info">
+    <h2 class="info__title">{{app.title}}</h2>
+    <p class="info__description">{{app.description}}</p>
+  </article>
+  <article class="detail__buy">
+    <div class="detail__price">
+      <mat-card class="price__discount">
+        <span>-{{app.discount}}%</span>
+      </mat-card>
+      <span class="price">{{app.price}}</span>
+      <span class="price__actual">{{app.actualPrice}}</span>
+    </div>
+    <button class="add-to-cart" mat-stroked-button>В корзину</button>
+  </article>
+</section>
+
+

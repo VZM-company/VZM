@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule } from '@angular/material';
+import { AppDetailComponent } from './app-detail/app-detail';
 // For MDB Angular Free
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MatButtonModule, MatCardModule } from '@angular/material';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    AppDetailComponent  
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { MatButtonModule, MatCardModule } from '@angular/material';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'app-detail', component: AppDetailComponent },
     ]),
     BrowserAnimationsModule,
     MatButtonModule,

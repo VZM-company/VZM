@@ -20,22 +20,19 @@
         [ngClass]="{ show: isExpanded }"
       >
         <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a mat-stroked-button color="primary" class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          <li class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a mat-flat-button color="basic" class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-stroked-button color="primary" class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
+            <a mat-flat-button color="basic" [routerLink]="['/counter']">Counter</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-stroked-button color="primary" class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
+            <a mat-flat-button color="basic" [routerLink]="['/app-detail']">App detail</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a mat-flat-button color="basic" [routerLink]="['/fetch-data']">Fetch data</a>
           </li>
         </ul>
       </div>
