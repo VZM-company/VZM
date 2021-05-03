@@ -1,0 +1,28 @@
+.app-cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.app-card {
+  height: 160px;
+  width: 30%;
+  margin: 10px;
+  padding: 0;
+}
+
+.app-card__image {
+  height: 100px;
+  border-start-start-radius: 4px;
+  border-start-end-radius: 4px;
+  background-color: rgba(0,0,0,0.2)
+}
+
+.app-card__description {
+  min-height: 100px;
+  padding: 10px;
+}
+
+.description__discount {
+  text-decoration: line-through;
+}

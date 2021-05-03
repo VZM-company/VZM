@@ -1,9 +1,30 @@
 <h1>Специальные предложения</h1>
-<div *ngFor="let item of items; let i = index">
-  <mat-card class="cards">
-    {{item.name}}<br />
-    {{item.price}}<br />
-    {{item.left}}<br />
-    {{item.discrount}}<br />
+<div class="app-cards">
+  <mat-card class="app-card" *ngFor="let item of items; let i = index">
+    <div class="app-card__image">
+      <!--<img src="#" alt="Alternate Text" />-->
+    </div>
+    <div class="app-card__description">
+      {{item.name}}
+      <span class="description__discount">{{item.discount}}</span>
+      {{item.price}}
+      {{item.left}}
+    </div>
   </mat-card>
 </div>
+
+<h1>Популярное</h1>
+<div class="app-cards">
+  <mat-card class="app-card" *ngFor="let item of items; let i = index">
+    <div class="app-card__image">
+      <!--<img src="#" alt="Alternate Text" />-->
+    </div>
+    <div class="app-card__description">
+      {{item.name}}
+      <span class="description__discount">{{item.discount}}</span>
+      {{item.price}}
+      {{item.left}}
+    </div>
+  </mat-card>
+</div>
+
