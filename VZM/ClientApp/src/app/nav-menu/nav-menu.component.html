@@ -25,15 +25,15 @@
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+            <a mat-stroked-button color="primary" class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
+            <a mat-stroked-button color="primary" class="nav-link text-dark" [routerLink]="['/counter']"
               >Counter</a
             >
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
+            <a mat-stroked-button color="primary" class="nav-link text-dark" [routerLink]="['/fetch-data']"
               >Fetch data</a
             >
           </li>
