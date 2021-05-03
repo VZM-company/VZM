@@ -16,6 +16,9 @@ namespace VZM.Entities
         public int CartId { get; set; }
         public Cart Cart { get; set; }
 
+        public int SellerId { get; set; }
+        public User Seller { get; set; }
+
         public List<User> Users { get; set; }
     }
 }
