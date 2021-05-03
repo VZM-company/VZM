@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VZM.Entities
 {
@@ -14,5 +15,7 @@ namespace VZM.Entities
 
         public int CartId { get; set; }
         public Cart Cart { get; set; }
+
+        public List<User> Users { get; set; }
     }
 }

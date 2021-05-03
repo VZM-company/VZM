@@ -15,7 +15,10 @@ namespace VZM.Entities
         public DateTime CreatedAt { get; set; }
         public string Info { get; set; }
         public byte Confirmed { get; set; }
+
         public int RoleId { get; set; }
         public Role Role { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }
