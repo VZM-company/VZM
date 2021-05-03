@@ -7,7 +7,7 @@ using VZM.Entities;
 
 namespace VZM.Interfaces
 {
-    public interface ICart
+    public interface ICartRepository
     {
         public IEnumerable<Cart> GetCarts();
         public Cart GetCart(int id);

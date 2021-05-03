@@ -7,7 +7,7 @@ using VZM.Entities;
 
 namespace VZM.Interfaces
 {
-    public interface IProduct
+    public interface IProductRepository
     {
         public IEnumerable<Product> GetProducts();
         public Product GetProduct(int id);

@@ -7,7 +7,7 @@ using VZM.Entities;
 
 namespace VZM.Interfaces
 {
-    public interface IRole
+    public interface IRoleRepository
     {
         public Role GetRole(User user);
         public void SaveRole(User user, Role role);

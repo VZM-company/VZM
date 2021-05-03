@@ -7,8 +7,8 @@ using VZM.Entities;
 
 namespace VZM.Interfaces
 {
-    public interface IStatus
+    public interface IStatusRepository
     {
-        public CartStatus GetCartStatus(ICart cart);
+        public CartStatus GetCartStatus(ICartRepository cart);
     }
 }
