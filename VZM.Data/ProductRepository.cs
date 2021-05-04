@@ -21,11 +21,11 @@ namespace VZM.Data
 
         public void DeleteProduct(Guid id)
         {
-            var sql = "DELETE FROM Product WHERE Id = @Id";
+            var sql = "DELETE FROM Product WHERE ProductId = @ProductId";
             var cmd = new SqlCommand(sql, _connection);
 
-            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier);
-            cmd.Parameters["@Id"].Value = id;
+            cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@ProductId"].Value = id;
 
             _connection.Open();
             cmd.ExecuteNonQuery();
@@ -34,11 +34,11 @@ namespace VZM.Data
 
         public Product GetProduct(Guid id)
         {
-            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId FROM Product WHERE Id = @Id";
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId FROM Product WHERE ProductId = @ProductId";
             var cmd = new SqlCommand(sql, _connection);
 
-            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier);
-            cmd.Parameters["@Id"].Value = id;
+            cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@ProductId"].Value = id;
 
             var result = new Product();
 
@@ -129,10 +129,10 @@ namespace VZM.Data
             cmd.Parameters["@ImageUrl"].Value = product.ImageUrl;
 
             cmd.Parameters.Add("@CartId", SqlDbType.UniqueIdentifier);
-            cmd.Parameters["@CartId"].Value = product.CartId;
+            cmd.Parameters["@CartId"].Value = product.CartId is null ? DBNull.Value : product.CartId;
 
             cmd.Parameters.Add("@SellerId", SqlDbType.UniqueIdentifier);
-            cmd.Parameters["@SellerId"].Value = product.SellerId;
+            cmd.Parameters["@SellerId"].Value = product.SellerId  is null ? DBNull.Value : product.SellerId;
         }
 
         private static Product PopulateFromRecord(IDataRecord record)
@@ -142,13 +142,13 @@ namespace VZM.Data
                 ProductId = record.GetGuid(0),
                 Title = record.GetString(1),
                 MetaTitle = record.GetString(2),
-                Price = record.GetInt32(3),
+                Price = record.GetDouble(3),
                 CreatedAt = record.GetDateTime(4),
                 Description = record.GetString(5),
                 DescriptionShort = record.GetString(6),
                 ImageUrl = record.GetString(7),
-                CartId = record.GetGuid(8),
-                SellerId = record.GetGuid(9),
+                CartId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(8),
+                SellerId = record.GetValue(9) == DBNull.Value ? null : record.GetGuid(9),
             };
 
             return product;
