@@ -5,7 +5,7 @@ namespace VZM.Entities
 {
     public class Product
     {
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public string Title { get; set; }
         public string MetaTitle { get; set; }
         public float Price { get; set; }
@@ -13,10 +13,10 @@ namespace VZM.Entities
         public string Description { get; set; }
         public string DescriptionShort { get; set; }
 
-        public int CartId { get; set; }
+        public Guid CartId { get; set; }
         public Cart Cart { get; set; }
 
-        public int SellerId { get; set; }
+        public Guid SellerId { get; set; }
         public User Seller { get; set; }
 
         public List<User> Users { get; set; }

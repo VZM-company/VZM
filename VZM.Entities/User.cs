@@ -5,7 +5,7 @@ namespace VZM.Entities
 {
     public class User
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public string Name { get; set; }
         public string PasswordHash { get; set; }
         public string Email { get; set; }
@@ -13,7 +13,7 @@ namespace VZM.Entities
         public string Info { get; set; }
         public byte Confirmed { get; set; }
 
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
         public Role Role { get; set; }
 
         public List<Product> Products { get; set; }
