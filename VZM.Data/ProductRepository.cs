@@ -34,7 +34,7 @@ namespace VZM.Data
 
         public Product GetProduct(Guid id)
         {
-            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, CartId, SellerId FROM Product WHERE Id = @Id";
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId FROM Product WHERE Id = @Id";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier);
@@ -57,7 +57,7 @@ namespace VZM.Data
 
         public IEnumerable<Product> GetProducts()
         {
-            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, CartId, SellerId FROM Product";
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId FROM Product";
             var cmd = new SqlCommand(sql, _connection);
 
             var result = new List<Product>();
@@ -81,14 +81,14 @@ namespace VZM.Data
 
             if (product.ProductId == default)
             {
-                sql = "INSERT INTO Product (ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, CartId, SellerId)" +
-" VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort, @CartId, @SellerId)";
+                sql = "INSERT INTO Product (ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId)" +
+" VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort, @ImageUrl, @CartId, @SellerId)";
 
                 product.ProductId = Guid.NewGuid();
             }
             else
             {
-                sql = "UPDATE Product SET Title = @Title, MetaTitle = @MetaTitle, Price = @Price, CreatedAt = @CreatedAt, Description = @Description, DescriptionShort = @DescriptionShort Where ProductId = @ProductId";
+                sql = "UPDATE Product SET Title = @Title, MetaTitle = @MetaTitle, Price = @Price, CreatedAt = @CreatedAt, Description = @Description, DescriptionShort = @DescriptionShort, ImageUrl = @ImageUrl WHERE ProductId = @ProductId";
             }
 
             var cmd = new SqlCommand(sql, _connection);
@@ -125,6 +125,9 @@ namespace VZM.Data
             cmd.Parameters.Add("@DescriptionShort", SqlDbType.NVarChar);
             cmd.Parameters["@DescriptionShort"].Value = product.DescriptionShort;
 
+            cmd.Parameters.Add("@ImageUrl", SqlDbType.NVarChar);
+            cmd.Parameters["@ImageUrl"].Value = product.ImageUrl;
+
             cmd.Parameters.Add("@CartId", SqlDbType.UniqueIdentifier);
             cmd.Parameters["@CartId"].Value = product.CartId;
 
@@ -143,8 +146,9 @@ namespace VZM.Data
                 CreatedAt = record.GetDateTime(4),
                 Description = record.GetString(5),
                 DescriptionShort = record.GetString(6),
-                CartId = record.GetGuid(7),
-                SellerId = record.GetGuid(8),
+                ImageUrl = record.GetString(7),
+                CartId = record.GetGuid(8),
+                SellerId = record.GetGuid(9),
             };
 
             return product;
