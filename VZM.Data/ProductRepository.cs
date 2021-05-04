@@ -19,63 +19,135 @@ namespace VZM.Data
             _connection = connection;
         }
 
-        public void DeleteProduct(int id)
+        public void DeleteProduct(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Product GetProduct(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Product> GetProducts()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveProduct(Product product)
-        {
-            //var sql = "UPDATE product SET product_id = @ProductId, title = @Title, meta_title = @MetaTitle, price = @Price, created_at = @CreatedAt, description = @Description, description_short = @DescriptionShort, cart_id = @CartId, seller_id = @SellerId WHERE product_id = @Id";
-
-            //var sql = "INSERT INTO product (product_id, title, meta_title, price, created_at, description, description_short, cart_id, seller_id)" +
-            //    "VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort, @CartId, @SellerId)";
-
-            var sql = "INSERT INTO product (product_id, title, meta_title, price, created_at, description, description_short)" +
-    " VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort)";
-
+            var sql = "DELETE FROM Product WHERE Id = @Id";
             var cmd = new SqlCommand(sql, _connection);
 
-            cmd.Parameters.Add("@ProductId", SqlDbType.Int);
-            cmd.Parameters["@ProductId"].Value = 1;
-
-            cmd.Parameters.Add("@Title", SqlDbType.NVarChar);
-            cmd.Parameters["@Title"].Value = "Title";
-
-            cmd.Parameters.Add("@MetaTitle", SqlDbType.NVarChar);
-            cmd.Parameters["@MetaTitle"].Value = "Meta";
-
-            cmd.Parameters.Add("@Price", SqlDbType.Int);
-            cmd.Parameters["@Price"].Value = 1;
-
-            cmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime);
-            cmd.Parameters["@CreatedAt"].Value = DateTime.Now;
-
-            cmd.Parameters.Add("@Description", SqlDbType.NVarChar);
-            cmd.Parameters["@Description"].Value = "Description";
-
-            cmd.Parameters.Add("@DescriptionShort", SqlDbType.NVarChar);
-            cmd.Parameters["@DescriptionShort"].Value = "DescriptionShort";
-
-            //cmd.Parameters.Add("@CartId", SqlDbType.Int);
-            //cmd.Parameters["@CartId"].Value = 1;
-
-            //cmd.Parameters.Add("@SellerId", SqlDbType.Int);
-            //cmd.Parameters["@SellerId"].Value = 1;
+            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@Id"].Value = id;
 
             _connection.Open();
             cmd.ExecuteNonQuery();
             _connection.Close();
+        }
+
+        public Product GetProduct(Guid id)
+        {
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, CartId, SellerId FROM Product WHERE Id = @Id";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@Id"].Value = id;
+
+            var result = new Product();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            while (reader.Read())
+            {
+                result = PopulateFromRecord(reader);
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
+        }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, CartId, SellerId FROM Product";
+            var cmd = new SqlCommand(sql, _connection);
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
+        }
+
+        public void SaveProduct(Product product)
+        {
+            var sql = "";
+
+            if (product.ProductId == default)
+            {
+                sql = "INSERT INTO Product (ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, CartId, SellerId)" +
+" VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort, @CartId, @SellerId)";
+
+                product.ProductId = Guid.NewGuid();
+            }
+            else
+            {
+                sql = "UPDATE Product SET Title = @Title, MetaTitle = @MetaTitle, Price = @Price, CreatedAt = @CreatedAt, Description = @Description, DescriptionShort = @DescriptionShort Where ProductId = @ProductId";
+            }
+
+            var cmd = new SqlCommand(sql, _connection);
+
+            PopulateParametres(cmd, product);
+
+            _connection.Open();
+            cmd.ExecuteNonQuery();
+            _connection.Close();
+        }
+
+        private static void PopulateParametres(SqlCommand cmd, Product product)
+        {
+            cmd.Parameters.Clear();
+
+            cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@ProductId"].Value = product.ProductId;
+
+            cmd.Parameters.Add("@Title", SqlDbType.NVarChar);
+            cmd.Parameters["@Title"].Value = product.Title;
+
+            cmd.Parameters.Add("@MetaTitle", SqlDbType.NVarChar);
+            cmd.Parameters["@MetaTitle"].Value = product.MetaTitle;
+
+            cmd.Parameters.Add("@Price", SqlDbType.Int);
+            cmd.Parameters["@Price"].Value = product.Price;
+
+            cmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime);
+            cmd.Parameters["@CreatedAt"].Value = product.CreatedAt;
+
+            cmd.Parameters.Add("@Description", SqlDbType.NVarChar);
+            cmd.Parameters["@Description"].Value = product.Description;
+
+            cmd.Parameters.Add("@DescriptionShort", SqlDbType.NVarChar);
+            cmd.Parameters["@DescriptionShort"].Value = product.DescriptionShort;
+
+            cmd.Parameters.Add("@CartId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@CartId"].Value = product.CartId;
+
+            cmd.Parameters.Add("@SellerId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@SellerId"].Value = product.SellerId;
+        }
+
+        private static Product PopulateFromRecord(IDataRecord record)
+        {
+            var product = new Product
+            {
+                ProductId = record.GetGuid(0),
+                Title = record.GetString(1),
+                MetaTitle = record.GetString(2),
+                Price = record.GetInt32(3),
+                CreatedAt = record.GetDateTime(4),
+                Description = record.GetString(5),
+                DescriptionShort = record.GetString(6),
+                CartId = record.GetGuid(7),
+                SellerId = record.GetGuid(8),
+            };
+
+            return product;
         }
     }
 }
