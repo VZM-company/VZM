@@ -6,6 +6,7 @@
  [Price] float NOT NULL,
  [CreatedAt] datetime NOT NULL,
  [Description] text NOT NULL,
+ [ImageUrl] varchar(200) Null,
  [DescriptionShort] varchar(50) NOT NULL,
  [CartId] uniqueidentifier NULL,
  [SellerId] uniqueidentifier NOT NULL,
