@@ -7,7 +7,7 @@
  [CreatedAt] datetime NOT NULL,
  [Description] text NOT NULL,
  [DescriptionShort] varchar(50) NOT NULL,
- [CartId] uniqueidentifier NOT NULL,
+ [CartId] uniqueidentifier NULL,
  [SellerId] uniqueidentifier NOT NULL,
 
 

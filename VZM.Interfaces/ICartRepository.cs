@@ -10,8 +10,8 @@ namespace VZM.Interfaces
     public interface ICartRepository
     {
         public IEnumerable<Cart> GetCarts();
-        public Cart GetCart(int id);
-        public void DeleteCart(int id);
+        public Cart GetCart(Guid id);
+        public void DeleteCart(Guid id);
         public void SaveCart(Cart cart);
 
         public IEnumerable<Product> GetCartItems();

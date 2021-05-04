@@ -10,8 +10,8 @@ namespace VZM.Interfaces
     public interface IProductRepository
     {
         public IEnumerable<Product> GetProducts();
-        public Product GetProduct(int id);
+        public Product GetProduct(Guid id);
         public void SaveProduct(Product product);
-        public void DeleteProduct(int id);
+        public void DeleteProduct(Guid id);
     }
 }

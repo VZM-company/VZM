@@ -13,7 +13,7 @@ namespace VZM.Entities
         public string Info { get; set; }
         public byte Confirmed { get; set; }
 
-        public Guid RoleId { get; set; }
+        public Guid? RoleId { get; set; } = null;
         public Role Role { get; set; }
 
         public List<Product> Products { get; set; }

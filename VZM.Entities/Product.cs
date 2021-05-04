@@ -12,11 +12,12 @@ namespace VZM.Entities
         public DateTime CreatedAt { get; set; }
         public string Description { get; set; }
         public string DescriptionShort { get; set; }
+        public string ImageUrl { get; set; }
 
-        public Guid CartId { get; set; }
+        public Guid? CartId { get; set; } = null;
         public Cart Cart { get; set; }
 
-        public Guid SellerId { get; set; }
+        public Guid? SellerId { get; set; } = null;
         public User Seller { get; set; }
 
         public List<User> Users { get; set; }

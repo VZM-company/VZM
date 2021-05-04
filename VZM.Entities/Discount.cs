@@ -8,8 +8,8 @@ namespace VZM.Entities
         public float Value { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ExpiredAt { get; set; }
-        
-        public Guid ProductId { get; set; }
+
+        public Guid? ProductId { get; set; } = null;
         public Product Product { get; set; }
     }
 }
