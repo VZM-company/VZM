@@ -8,7 +8,7 @@ namespace VZM.Entities
         public Guid ProductId { get; set; }
         public string Title { get; set; }
         public string MetaTitle { get; set; }
-        public float Price { get; set; }
+        public double Price { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Description { get; set; }
         public string DescriptionShort { get; set; }
