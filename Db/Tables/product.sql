@@ -5,9 +5,9 @@
  [MetaTitle] varchar(50) NOT NULL,
  [Price] float NOT NULL,
  [CreatedAt] datetime NOT NULL,
- [Description] text NOT NULL,
- [ImageUrl] varchar(200) Null,
+ [Description] varchar(MAX) NOT NULL,
  [DescriptionShort] varchar(50) NOT NULL,
+ [ImageUrl] varchar(200) NULL,
  [CartId] uniqueidentifier NULL,
  [SellerId] uniqueidentifier NOT NULL,
 
