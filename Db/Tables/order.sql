@@ -1,26 +1,26 @@
-﻿CREATE TABLE [dbo].[order]
+﻿CREATE TABLE [dbo].[Order]
 (
- [order_id]        int NOT NULL ,
- [created_at]      datetime NOT NULL ,
- [cart_id]         int NOT NULL ,
- [order_status_id] int NOT NULL ,
+ [OrderId] uniqueidentifier NOT NULL,
+ [CreatedAt] datetime NOT NULL,
+ [CartId] uniqueidentifier NOT NULL,
+ [OrderStatusId] uniqueidentifier NOT NULL,
 
 
- CONSTRAINT [PK_order] PRIMARY KEY CLUSTERED ([order_id] ASC),
- CONSTRAINT [FK_dbo_order_dbo_cart] FOREIGN KEY ([cart_id])  REFERENCES [dbo].[cart]([cart_id]),
- CONSTRAINT [FK_dbo_order_dbo_order_status] FOREIGN KEY ([order_status_id])  REFERENCES [dbo].[order_status]([order_status_id])
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED ([OrderId] ASC),
+ CONSTRAINT [FK_dbo_Order_dbo_Cart] FOREIGN KEY ([CartId]) REFERENCES [dbo].[Cart]([CartId]),
+ CONSTRAINT [FK_dbo_Order_dbo_OrderStatus] FOREIGN KEY ([OrderStatusId]) REFERENCES [dbo].[OrderStatus]([OrderStatusId])
 );
 GO
 
 
-CREATE NONCLUSTERED INDEX [IX_dbo_order_cart_id] ON [dbo].[order] 
+CREATE NONCLUSTERED INDEX [IX_dbo_Order_CartId] ON [dbo].[Order] 
  (
-  [cart_id] ASC
+  [CartId] ASC
  )
 GO
 
-CREATE NONCLUSTERED INDEX [IX_dbo_order_order_status_id] ON [dbo].[order] 
+CREATE NONCLUSTERED INDEX [IX_dbo_Order_OrderStatusId] ON [dbo].[Order] 
  (
-  [order_status_id] ASC
+  [OrderStatusId] ASC
  )
 GO

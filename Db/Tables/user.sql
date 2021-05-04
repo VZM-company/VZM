@@ -1,24 +1,24 @@
-﻿CREATE TABLE [dbo].[user]
+﻿CREATE TABLE [dbo].[User]
 (
- [user_id]       int NOT NULL ,
- [name]          varchar(50) NOT NULL ,
- [username]      varchar(50) NOT NULL ,
- [password_hash] varchar(200) NOT NULL ,
- [email]         varchar(256) NOT NULL ,
- [created_at]    datetime NOT NULL ,
- [info]          varchar(250) NOT NULL ,
- [confirmed]     bit NOT NULL ,
- [role_id]       int NOT NULL ,
+ [UserId] uniqueidentifier NOT NULL,
+ [Name] varchar(50) NOT NULL,
+ [Username] varchar(50) NOT NULL,
+ [PasswordHash] varchar(200) NOT NULL,
+ [Email] varchar(256) NOT NULL,
+ [CreatedAt] datetime NOT NULL,
+ [Info] varchar(250) NOT NULL,
+ [Confirmed] bit NOT NULL,
+ [RoleId] uniqueidentifier NOT NULL,
 
 
- CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED ([user_id] ASC),
- CONSTRAINT [FK_dbo_user_dbo_role] FOREIGN KEY ([role_id])  REFERENCES [dbo].[role]([role_id])
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([UserId] ASC),
+ CONSTRAINT [FK_dbo_User_dbo_Role] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Role]([RoleId])
 );
 GO
 
 
-CREATE NONCLUSTERED INDEX [IX_dbo_user_role_id] ON [dbo].[user] 
+CREATE NONCLUSTERED INDEX [IX_dbo_User_RoleId] ON [dbo].[User] 
  (
-  [role_id] ASC
+  [RoleId] ASC
  )
 GO

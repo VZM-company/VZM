@@ -1,31 +1,31 @@
-﻿CREATE TABLE [dbo].[product]
+﻿CREATE TABLE [dbo].[Product]
 (
- [product_id]        int NOT NULL ,
- [title]             varchar(100) NOT NULL ,
- [meta_title]        varchar(50) NOT NULL ,
- [price]             float NOT NULL ,
- [created_at]        datetime NOT NULL ,
- [description]       text NOT NULL ,
- [description_short] varchar(50) NOT NULL ,
- [cart_id]           int NULL ,
- [seller_id]         int NULL ,
+ [ProductId] uniqueidentifier NOT NULL,
+ [Title] varchar(100) NOT NULL,
+ [MetaTitle] varchar(50) NOT NULL,
+ [Price] float NOT NULL,
+ [CreatedAt] datetime NOT NULL,
+ [Description] text NOT NULL,
+ [DescriptionShort] varchar(50) NOT NULL,
+ [CartId] uniqueidentifier NOT NULL,
+ [SellerId] uniqueidentifier NOT NULL,
 
 
- CONSTRAINT [PK_product] PRIMARY KEY CLUSTERED ([product_id] ASC),
- CONSTRAINT [FK_dbo_product_dbo_cart] FOREIGN KEY ([cart_id])  REFERENCES [dbo].[cart]([cart_id]),
- CONSTRAINT [FK_dbo_product_dbo_user] FOREIGN KEY ([seller_id])  REFERENCES [dbo].[user]([user_id])
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([ProductId] ASC),
+ CONSTRAINT [FK_dbo_Product_dbo_Cart] FOREIGN KEY ([CartId]) REFERENCES [dbo].[Cart]([CartId]),
+ CONSTRAINT [FK_dbo_Product_dbo_User] FOREIGN KEY ([SellerId]) REFERENCES [dbo].[User]([UserId])
 );
 GO
 
 
-CREATE NONCLUSTERED INDEX [IX_dbo_product_cart_id] ON [dbo].[product] 
+CREATE NONCLUSTERED INDEX [IX_dbo_Product_dbo_CartId] ON [dbo].[Product] 
  (
-  [cart_id] ASC
+  [CartId] ASC
  )
 GO
 
-CREATE NONCLUSTERED INDEX [IX_dbo_product_seller_id] ON [dbo].[product] 
+CREATE NONCLUSTERED INDEX [IX_dbo_Product_dbo_SellerId] ON [dbo].[Product] 
  (
-  [seller_id] ASC
+  [SellerId] ASC
  )
 GO

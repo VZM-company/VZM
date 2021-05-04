@@ -60,17 +60,17 @@
     <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\user_product.sql" />
-    <Build Include="Tables\role.sql" />
-    <Build Include="Tables\user.sql" />
-    <Build Include="Tables\product.sql" />
-    <Build Include="Tables\product_category.sql" />
-    <Build Include="Tables\category.sql" />
-    <Build Include="Tables\order_status.sql" />
-    <Build Include="Tables\order.sql" />
-    <Build Include="Tables\cart.sql" />
-    <Build Include="Tables\cart_status.sql" />
-    <Build Include="Tables\discount.sql" />
+    <Build Include="Tables\UserProduct.sql" />
+    <Build Include="Tables\Role.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\Product.sql" />
+    <Build Include="Tables\ProductCategory.sql" />
+    <Build Include="Tables\Category.sql" />
+    <Build Include="Tables\OrderStatus.sql" />
+    <Build Include="Tables\Order.sql" />
+    <Build Include="Tables\Cart.sql" />
+    <Build Include="Tables\CartStatus.sql" />
+    <Build Include="Tables\Discount.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Db.publish.xml" />

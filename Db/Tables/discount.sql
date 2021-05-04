@@ -1,20 +1,20 @@
-﻿CREATE TABLE [dbo].[discount]
+﻿CREATE TABLE [dbo].[Discount]
 (
- [discount_id] int NOT NULL ,
- [value]       float NOT NULL ,
- [created_at]  datetime NOT NULL ,
- [expired_at]  datetime NOT NULL ,
- [product_id]  int NOT NULL ,
+ [DiscountId] uniqueidentifier NOT NULL,
+ [Value] float NOT NULL,
+ [CreatedAt] datetime NOT NULL,
+ [ExpiredAt] datetime NOT NULL,
+ [ProductId] uniqueidentifier NOT NULL,
 
 
- CONSTRAINT [PK_discount] PRIMARY KEY CLUSTERED ([discount_id] ASC),
- CONSTRAINT [FK_dbo_discount_dbo_product] FOREIGN KEY ([product_id])  REFERENCES [dbo].[product]([product_id]),
+ CONSTRAINT [PK_Discount] PRIMARY KEY CLUSTERED ([DiscountId] ASC),
+ CONSTRAINT [FK_dbo_Discount_dbo_Product] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Product]([ProductId]),
 );
 GO
 
 
-CREATE NONCLUSTERED INDEX [IX_dbo_discount_product_id] ON [dbo].[discount] 
+CREATE NONCLUSTERED INDEX [IX_dbo_Discount_ProductId] ON [dbo].[Discount] 
  (
-  [product_id] ASC
+  [ProductId] ASC
  )
 GO
