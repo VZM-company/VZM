@@ -6,6 +6,8 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VZM.Data;
+using VZM.Interfaces;
 
 namespace VZM
 {
@@ -29,6 +31,8 @@ namespace VZM
             });
 
             services.AddSingleton(new SqlConnection(Configuration["DefaultConnection"]));
+
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
