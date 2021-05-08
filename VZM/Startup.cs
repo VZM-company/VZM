@@ -33,6 +33,8 @@ namespace VZM
             services.AddSingleton(new SqlConnection(Configuration["DefaultConnection"]));
 
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<DataManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
