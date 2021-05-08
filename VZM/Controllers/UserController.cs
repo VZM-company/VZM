@@ -11,7 +11,7 @@ namespace VZM.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController
+    public class UserController : ControllerBase
     {
         private DataManager _dataManager;
 
@@ -28,7 +28,27 @@ namespace VZM.Controllers
             try
             {
                 _dataManager.Users.SaveUser(user);
-                OkResult()
+                return CreatedAtAction(nameof(Registration), user);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<User> Registration(User user)
+        {
+            try
+            {
+                _dataManager.Users.SaveUser(user);
+                return CreatedAtAction(nameof(Registration), user);
+            }
+            catch
+            {
+                return BadRequest();
             }
         }
     }
