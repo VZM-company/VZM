@@ -43,17 +43,15 @@ namespace VZM.Controllers
         {
             var user = _dataManager.Users.GetUserByUsername(userName);
 
-            if (user == null)
+            if (user == null || user.PasswordHash != password)
             {
                 return NotFound();
             }
-
-            if (user.PasswordHash == password)
+            else
             {
                 return Ok(user);
             }
 
-            return NotFound();
         }
     }
 }
