@@ -34,7 +34,7 @@ namespace VZM.Data
 
         public Product GetProduct(Guid id)
         {
-            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId FROM Product WHERE ProductId = @ProductId";
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, SellerId FROM Product WHERE ProductId = @ProductId";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
@@ -57,7 +57,7 @@ namespace VZM.Data
 
         public IEnumerable<Product> GetProducts()
         {
-            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId FROM Product";
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, SellerId FROM Product";
             var cmd = new SqlCommand(sql, _connection);
 
             var result = new List<Product>();
@@ -81,8 +81,8 @@ namespace VZM.Data
 
             if (product.ProductId == default)
             {
-                sql = "INSERT INTO Product (ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, CartId, SellerId)" +
-" VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort, @ImageUrl, @CartId, @SellerId)";
+                sql = "INSERT INTO Product (ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, SellerId)" +
+" VALUES (@ProductId, @Title, @MetaTitle, @Price, @CreatedAt, @Description, @DescriptionShort, @ImageUrl, @SellerId)";
 
                 product.ProductId = Guid.NewGuid();
             }
@@ -128,9 +128,6 @@ namespace VZM.Data
             cmd.Parameters.Add("@ImageUrl", SqlDbType.NVarChar);
             cmd.Parameters["@ImageUrl"].Value = product.ImageUrl;
 
-            cmd.Parameters.Add("@CartId", SqlDbType.UniqueIdentifier);
-            cmd.Parameters["@CartId"].Value = product.CartId is null ? DBNull.Value : product.CartId;
-
             cmd.Parameters.Add("@SellerId", SqlDbType.UniqueIdentifier);
             cmd.Parameters["@SellerId"].Value = product.SellerId  is null ? DBNull.Value : product.SellerId;
         }
@@ -147,8 +144,7 @@ namespace VZM.Data
                 Description = record.GetString(5),
                 DescriptionShort = record.GetString(6),
                 ImageUrl = record.GetString(7),
-                CartId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(8),
-                SellerId = record.GetValue(9) == DBNull.Value ? null : record.GetGuid(9),
+                SellerId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(9),
             };
 
             return product;
