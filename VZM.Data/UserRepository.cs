@@ -177,6 +177,11 @@ namespace VZM.Data
                 result = PopulateFromRecord(reader);
             }
 
+            if (result.UserId == default)
+            {
+                result = null;
+            }
+
             reader.Close();
             _connection.Close();
 
