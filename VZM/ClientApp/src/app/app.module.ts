@@ -45,7 +45,6 @@ import { SearchComponent } from './search/search.component';
       { path: 'search', component: SearchComponent },
     ]),
     BrowserAnimationsModule,
-
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
