@@ -149,5 +149,30 @@ namespace VZM.Data
 
             return product;
         }
+
+        public IEnumerable<Product> GetProductsByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetProductsByPrice(double startPrice, double endPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetProductsByCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetProductsByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetProductsBySeller(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

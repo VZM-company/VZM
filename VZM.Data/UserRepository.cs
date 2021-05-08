@@ -149,5 +149,15 @@ namespace VZM.Data
 
             return user;
         }
+
+        public void ChangeRole(Guid userId, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetRole(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
