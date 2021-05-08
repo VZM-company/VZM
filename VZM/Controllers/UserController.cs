@@ -13,6 +13,13 @@ namespace VZM.Controllers
     [Route("[controller]")]
     public class UserController
     {
+        private DataManager _dataManager;
+
+        public UserController(DataManager dataManager)
+        {
+            _dataManager = dataManager;
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -20,7 +27,8 @@ namespace VZM.Controllers
         {
             try
             {
-                UserRepository
+                _dataManager.Users.SaveUser(user);
+                OkResult()
             }
         }
     }

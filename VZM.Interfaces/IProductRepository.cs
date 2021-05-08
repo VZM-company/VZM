@@ -13,5 +13,10 @@ namespace VZM.Interfaces
         public Product GetProduct(Guid id);
         public void SaveProduct(Product product);
         public void DeleteProduct(Guid id);
+        public IEnumerable<Product> GetProductsByName(string name);
+        public IEnumerable<Product> GetProductsByPrice(double startPrice, double endPrice);
+        public IEnumerable<Product> GetProductsByCategory(Category category);
+        public IEnumerable<Product> GetProductsByUser(User user);
+        public IEnumerable<Product> GetProductsBySeller(User user);
     }
 }
