@@ -159,5 +159,10 @@ namespace VZM.Data
         {
             throw new NotImplementedException();
         }
+
+        public User GetUserByUsername(string userName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
