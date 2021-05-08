@@ -39,17 +39,21 @@ namespace VZM.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> Registration(User user)
+        public ActionResult<User> Login(string userName, string password)
         {
-            try
+            var user = _dataManager.Users.GetUserByUsername(userName);
+
+            if (user == null)
             {
-                _dataManager.Users.SaveUser(user);
-                return CreatedAtAction(nameof(Registration), user);
+                return NotFound();
             }
-            catch
+
+            if (user.PasswordHash == password)
             {
-                return BadRequest();
+                return Ok(user);
             }
+
+            return NotFound();
         }
     }
 }

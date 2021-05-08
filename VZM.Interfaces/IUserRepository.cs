@@ -11,7 +11,7 @@ namespace VZM.Interfaces
     {
         public IEnumerable<User> GetUsers();
         public User GetUser(Guid id);
-        public User GetUserByUsername(string userName);
+        public User GetUserByUsername(string userName); // return null, when user not found
         public void SaveUser(User user);
         public void DeleteUser(Guid id);
         public void ChangeRole(Guid userId, string roleName);
