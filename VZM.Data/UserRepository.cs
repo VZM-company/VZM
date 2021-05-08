@@ -162,7 +162,25 @@ namespace VZM.Data
 
         public User GetUserByUsername(string userName)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM User WHERE Username = @Username";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@Username", SqlDbType.NVarChar);
+            cmd.Parameters["@Username"].Value = userName;
+
+            var result = new User();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            while (reader.Read())
+            {
+                result = PopulateFromRecord(reader);
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
         }
     }
 }

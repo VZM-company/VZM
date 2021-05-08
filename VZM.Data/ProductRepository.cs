@@ -152,27 +152,122 @@ namespace VZM.Data
 
         public IEnumerable<Product> GetProductsByName(string name)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, SellerId FROM Product Where Title = @Title";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@Title", SqlDbType.NVarChar);
+            cmd.Parameters["@Title"].Value = name;
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
         }
 
         public IEnumerable<Product> GetProductsByPrice(double startPrice, double endPrice)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, SellerId FROM Product WHERE Price BETWEEN @Start AND @End";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@Start", SqlDbType.Float);
+            cmd.Parameters["@Start"].Value = startPrice;
+
+            cmd.Parameters.Add("@End", SqlDbType.Float);
+            cmd.Parameters["@End"].Value = endPrice;
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
         }
 
         public IEnumerable<Product> GetProductsByCategory(Category category)
         {
-            throw new NotImplementedException();
+            var sql = "Select P.ProductId, P.Title, P.MetaTitle, P.Price, P.CreatedAt, P.[Description], P.DescriptionShort, P.ImageUrl, P.SellerId" +
+                " FROM ProductCategory AS PC JOIN Product AS P ON PC.[ProductId] = P.[ProductId] WHERE PC.[CategoryId]= @CategoryId";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@CategoryId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@CategoryId"].Value = category.CategoryId;
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
         }
 
         public IEnumerable<Product> GetProductsByUser(User user)
         {
-            throw new NotImplementedException();
+            var sql = "Select P.ProductId, P.Title, P.MetaTitle, P.Price, P.CreatedAt, P.[Description], P.DescriptionShort, P.ImageUrl, P.SellerId" +
+                " FROM UserProduct AS UP JOIN Product AS P ON UP.[ProductId] = P.[ProductId] WHERE UP.[UserId]= @UserId";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@UserId"].Value = user.UserId;
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
         }
 
         public IEnumerable<Product> GetProductsBySeller(User user)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT ProductId, Title, MetaTitle, Price, CreatedAt, Description, DescriptionShort, ImageUrl, SellerId FROM Product Where SellerId = @SellerId";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@SellerId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@SellerId"].Value = user.UserId;
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+            reader.Close();
+            _connection.Close();
+
+            return result;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace VZM.Entities
 {
     public class Category
     {
-        public Guid CategoriesId { get; set; }
+        public Guid CategoryId { get; set; }
         public string Title { get; set; }
         public string MetaTitle { get; set; }
         public string Description { get; set; }
