@@ -25,6 +25,13 @@
             <input required matInput formControlName="email" name="email">
           </mat-form-field>
           <mat-form-field>
+            <mat-label>Категория</mat-label>
+            <mat-select required formControlName="type" name="type">
+              <mat-option [value]="customer">Пользователь</mat-option>
+              <mat-option [value]="company">Компания</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
             <mat-label>Password</mat-label>
             <input required matInput formControlName="password" name="password">
           </mat-form-field>
