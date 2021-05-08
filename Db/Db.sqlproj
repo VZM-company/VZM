@@ -66,10 +66,7 @@
     <Build Include="Tables\Product.sql" />
     <Build Include="Tables\ProductCategory.sql" />
     <Build Include="Tables\Category.sql" />
-    <Build Include="Tables\OrderStatus.sql" />
-    <Build Include="Tables\Order.sql" />
     <Build Include="Tables\Cart.sql" />
-    <Build Include="Tables\CartStatus.sql" />
     <Build Include="Tables\Discount.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,24 @@
 ﻿CREATE TABLE [dbo].[Cart]
 (
- [CartId] uniqueidentifier NOT NULL,
- [CreatedAt] datetime NOT NULL,
- [CartStatusId] uniqueidentifier NOT NULL,
+ [UserId] uniqueidentifier NOT NULL,
+ [ProductId] uniqueidentifier NOT NULL,
 
 
- CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED ([CartId] ASC),
- CONSTRAINT [FK_dbo_Cart_dbo_CartStatus] FOREIGN KEY ([CartStatusId])  REFERENCES [dbo].[CartStatus]([CartStatusId])
+ CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED ([UserId] ASC, [ProductId] ASC),
+ CONSTRAINT [FK_dbo_Cart_dbo_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User]([UserId]),
+ CONSTRAINT [FK_dbo_Cart_dbo_Product] FOREIGN KEY ([ProductId])  REFERENCES [dbo].[Product]([ProductId])
 );
 GO
 
 
-CREATE NONCLUSTERED INDEX [IX_dbo_Cart_CartStatusId] ON [dbo].[Cart] 
+CREATE NONCLUSTERED INDEX [IX_dbo_Cart_UserId] ON [dbo].[Cart] 
  (
-  [CartStatusId] ASC
+  [UserId] ASC
+ )
+GO
+
+CREATE NONCLUSTERED INDEX [IX_dbo_Cart_ProductId] ON [dbo].[Cart] 
+ (
+  [ProductId] ASC
  )
 GO
