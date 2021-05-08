@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VZM.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VZM.Entities;
 
 namespace VZM.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private DataManager _dataManager;
@@ -42,7 +38,6 @@ namespace VZM.Controllers
         public ActionResult<User> Login(string userName, string password)
         {
             var user = _dataManager.Users.GetUserByUsername(userName);
-
             if (user == null || user.PasswordHash != password)
             {
                 return NotFound();
@@ -51,7 +46,6 @@ namespace VZM.Controllers
             {
                 return Ok(user);
             }
-
         }
     }
 }
