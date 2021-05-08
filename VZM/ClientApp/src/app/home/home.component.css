@@ -2,10 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: space-between;
 }
 
 .app-card {
-  height: 160px;
+  height: 170px;
   width: 30%;
   margin: 10px;
   padding: 0;
@@ -19,10 +20,41 @@
 }
 
 .app-card__description {
-  min-height: 100px;
+  min-height: 60px;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .description__discount {
   text-decoration: line-through;
+}
+
+.description__name {
+  font-weight: 600;
+  width: 100%;
+}
+
+.description__price {
+  color: gray;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.description__price-discount {
+  text-decoration: line-through;
+  margin: 0 10px;
+}
+
+.description__actualPrice {
+  color: #000;
+  font-size: 20px;
+}
+
+.description__left {
+  color: gray;
+  font-size: 14px;
 }

@@ -1,0 +1,40 @@
+<section class="container">
+  <mat-card class="auth-form">
+    <mat-tab-group>
+      <mat-tab label="Вход">
+        <form action="/" method="post" [formGroup]="loginForm">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input required matInput formControlName="email" name="email">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input required matInput formControlName="password" name="password">
+          </mat-form-field>
+          <button mat-stroked-button color="primary" type="submit">Войти</button>
+        </form>
+      </mat-tab>
+      <mat-tab label="Регистрация">
+        <form action="/" method="post" [formGroup]="registerForm">
+          <mat-form-field>
+            <mat-label>Nickname</mat-label>
+            <input required matInput formControlName="nickname" name="nickname">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input required matInput formControlName="email" name="email">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input required matInput formControlName="password" name="password">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Repeat password</mat-label>
+            <input required matInput formControlName="repeat_password" name="repeat_password">
+          </mat-form-field>
+          <button mat-stroked-button color="primary" type="submit">Зарегистрироваться</button>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</section>

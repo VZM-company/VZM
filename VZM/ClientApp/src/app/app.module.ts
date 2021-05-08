@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -10,9 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldControl, MatFormFieldModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { AppDetailComponent } from './app-detail/app-detail';
-// For MDB Angular Free
+import { AuthComponent } from './auth/auth.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { AppDetailComponent } from './app-detail/app-detail';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    AppDetailComponent  
+    AppDetailComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,10 +33,15 @@ import { AppDetailComponent } from './app-detail/app-detail';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'app-detail', component: AppDetailComponent },
+      { path: 'auth', component: AuthComponent },
     ]),
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
