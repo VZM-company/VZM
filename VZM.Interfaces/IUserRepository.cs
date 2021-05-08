@@ -13,5 +13,7 @@ namespace VZM.Interfaces
         public User GetUser(Guid id);
         public void SaveUser(User user);
         public void DeleteUser(Guid id);
+        public void ChangeRole(Guid userId, string roleName);
+        public string GetRole(Guid userId);
     }
 }
