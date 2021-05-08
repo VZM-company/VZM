@@ -1,0 +1,141 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.profile-item {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.profile-item:last-child {
+    margin-bottom: 0;
+}
+
+.profile-item__image {
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.profile-item__description {
+  min-height: 60px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.detail__buy {
+  width: calc(50% - 20px);
+  min-height: 200px;
+  padding: 0 20px;
+}
+
+.detail__price {
+  display: flex;
+  /*justify-content: flex-end;*/
+  align-items: center;
+  font-size: 25px;
+}
+
+.detail__profile {
+  display: flex;
+  /*justify-content: flex-end;*/
+  width: 100%;
+}
+
+.price {
+  text-decoration: line-through;
+  margin: 0 20px;
+}
+
+.price__discount {
+  text-align: center;
+  padding: 0 10px;
+  height: 45px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.buy-button {
+  height: 60px;
+  width: 160px;
+  font-size: 25px;
+}
+
+.cart-buy {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.app-cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.app-card {
+  height: 170px;
+  width: 30%;
+  margin: 10px;
+  padding: 0;
+}
+
+.app-card__image {
+  height: 100px;
+  border-start-start-radius: 4px;
+  border-start-end-radius: 4px;
+  background-color: rgba(0,0,0,0.2)
+}
+
+.app-card__description {
+  min-height: 60px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.description__discount {
+  text-decoration: line-through;
+}
+
+.description__name {
+  font-weight: 600;
+  width: 100%;
+}
+
+.description__price {
+  color: gray;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.description__price-discount {
+  text-decoration: line-through;
+  margin: 0 10px;
+}
+
+.description__actualPrice {
+  color: #000;
+  font-size: 20px;
+}
+
+.description__left {
+  color: gray;
+  font-size: 14px;
+}

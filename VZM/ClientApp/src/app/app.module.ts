@@ -10,9 +10,12 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatFormFieldControl, MatFormFieldModule, MatInputModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldControl, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressSpinner, MatProgressSpinnerModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { AppDetailComponent } from './app-detail/app-detail';
 import { AuthComponent } from './auth/auth.component'
+import { CartComponent } from './cart/cart.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { AuthComponent } from './auth/auth.component'
     FetchDataComponent,
     AppDetailComponent,
     AuthComponent,
+    CartComponent,
+    ProfileComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,14 +40,21 @@ import { AuthComponent } from './auth/auth.component'
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'app-detail', component: AppDetailComponent },
       { path: 'auth', component: AuthComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'search', component: SearchComponent },
     ]),
     BrowserAnimationsModule,
+
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit {
     email: new FormControl(""),
     password: new FormControl(""),
     repeat_password: new FormControl(""),
+    type: new FormControl(""),
   });
 
   constructor(
