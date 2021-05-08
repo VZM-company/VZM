@@ -9,9 +9,9 @@ namespace VZM.Interfaces
 {
     public interface IUserRepository
     {
-        public IEnumerable<User> GetProducts();
-        public User GetProduct(Guid id);
-        public void SaveProduct(User user);
-        public void DeleteProduct(Guid id);
+        public IEnumerable<User> GetUsers();
+        public User GetUser(Guid id);
+        public void SaveUser(User user);
+        public void DeleteUser(Guid id);
     }
 }
