@@ -78,7 +78,9 @@ export class ProductComponent implements OnInit {
       this.product.Image = this.productForm.get("image").value;
       this.product.Price = this.productForm.get("price").value;
       this.product.Title = this.productForm.get("title").value;
-      this.product.UserId = this.userService.user["userId"];
+      this.product.UserId = this.userService.getUser()['userId'];
+      this.product.ProductId = "";
+
 
       let option = this.product.ProductId.trim() == '' ? "/create" : "/update";
       console.log(this.product);

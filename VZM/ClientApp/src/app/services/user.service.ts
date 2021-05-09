@@ -32,6 +32,14 @@ export class UserService {
     }
 
     /**
+       * Set user object.
+       * @param userInfo the object.
+       */
+    getUser() : Object {
+      return this.getStoreParam('user');
+    }
+
+    /**
      * Whether the current user is a authenticated.
      */
     isAuthenticated (): boolean {
