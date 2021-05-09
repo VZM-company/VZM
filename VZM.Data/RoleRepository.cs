@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Data;
 using VZM.Entities;
 using VZM.Interfaces;
@@ -32,7 +33,7 @@ namespace VZM.Data
             return role;
         }
 
-        public Role GetRoleById(string id)
+        public Role GetRoleById(Guid id)
         {
             var sql = "Select * FROM [Role] WHERE [RoleId]= @RoleId";
             var cmd = new SqlCommand(sql, _connection);
