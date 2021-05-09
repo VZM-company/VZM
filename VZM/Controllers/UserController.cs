@@ -98,6 +98,7 @@ namespace VZM.Controllers
                               Name = prod.Title,
                               Price = prod.Price,
                               ImageUrl = prod.ImageUrl,
+                              ActualPrice = prod.Price - prod.Price * discount.Value / 100, 
                               Discount = discount.Value,
                               Left = (discount.ExpiredAt - discount.CreatedAt),
                           };
@@ -113,6 +114,7 @@ namespace VZM.Controllers
                               Name = prod.Title,
                               Price = prod.Price,
                               ImageUrl = prod.ImageUrl,
+                              ActualPrice = prod.Price - prod.Price * discount.Value / 100,
                               Discount = discount.Value,
                               Left = (discount.ExpiredAt - discount.CreatedAt),
                           };
