@@ -7,7 +7,7 @@
  [CreatedAt] datetime NOT NULL,
  [Description] varchar(MAX) NOT NULL,
  [DescriptionShort] varchar(50) NOT NULL,
- [ImageUrl] varchar(200) NULL,
+ [ImageUrl] nvarchar(MAX) NULL,
  [SellerId] uniqueidentifier NOT NULL,
 
 
