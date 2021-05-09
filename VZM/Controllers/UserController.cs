@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using VZM.Data;
 using VZM.Entities;
 using VZM.ViewModels;
@@ -18,6 +19,7 @@ namespace VZM.Controllers
             _dataManager = dataManager;
         }
 
+        // POST: api/User/register
         [HttpPost]
         [Route("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -52,6 +54,7 @@ namespace VZM.Controllers
             return Ok(newUser);
         }
 
+        // POST: api/User/login
         [HttpPost]
         [Route("login")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -66,6 +69,31 @@ namespace VZM.Controllers
             else
             {
                 return Ok(user);
+            }
+        }
+
+        // GET: api/User/myProducts/{id}
+        [HttpGet("id")]
+        [Route("myProducts")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<Product>> Get(string id)
+        {
+
+            var user = _dataManager.Users.GetUser(Guid.Parse(id));
+            if(user == null)
+            {
+                return NotFound();
+            }
+            
+            var role = _dataManager.Roles.GetRoleById(user.RoleId.ToString());
+            if(role.Name == "company")
+            {
+                return Ok(_dataManager.Products.GetProductsBySeller(user));
+            }
+            else
+            {
+                return Ok(_dataManager.Products.GetProductsByUser(user));
             }
         }
     }

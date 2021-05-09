@@ -32,6 +32,24 @@ namespace VZM.Data
             return role;
         }
 
+        public Role GetRoleById(string id)
+        {
+            var sql = "Select * FROM [Role] WHERE [RoleId]= @RoleId";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@RoleId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@RoleId"].Value = id;
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            reader.Read();
+
+            var role = PopulateFromRecord(reader);
+            _connection.Close();
+
+            return role;
+        }
+
         private static Role PopulateFromRecord(IDataRecord record)
         {
             var role = new Role

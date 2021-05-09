@@ -10,5 +10,6 @@ namespace VZM.Interfaces
     public interface IRoleRepository
     {
         public Role GetRoleByTitle(string title);
+        public Role GetRoleById(string id);
     }
 }
