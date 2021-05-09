@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -34,10 +35,11 @@ export class HomeComponent implements OnInit {
 
   items_other = this.items;
 
+  userService: UserService;
   constructor(
-
+    userService: UserService
   ) {
-
+    this.userService = userService;
   }
 
   ngOnInit(): void {

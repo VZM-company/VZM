@@ -51,7 +51,7 @@ export class AuthComponent implements OnInit {
     this.registerForm.get("username").setValue("username test");
     this.registerForm.get("password").setValue("123123");
     this.registerForm.get("repeat_password").setValue("123123");
-    this.registerForm.get("role").setValue("user");
+    this.registerForm.get("role").setValue("customer");
     this.registerForm.get("email").setValue("tut@tut.tut");
     this.registerForm.get("name").setValue("user name test");
   }
