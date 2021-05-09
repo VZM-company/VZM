@@ -27,7 +27,6 @@ namespace VZM.Controllers
             {
                 //product.SellerId = _dataManager.AuthorizedUser.UserId;
                 product.CreatedAt = DateTime.Now;
-                product.ImageUrl = "URL"; // TODO: re-write 
                 _dataManager.Products.SaveProduct(product);
                 return Ok(product);
             }
