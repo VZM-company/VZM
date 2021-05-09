@@ -5,8 +5,8 @@ using VZM.Entities;
 
 namespace VZM.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
         private DataManager _dataManager;
@@ -16,7 +16,7 @@ namespace VZM.Controllers
         }
 
         // POST: api/products/create
-        [HttpGet]
+        [HttpPost]
         [Route("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

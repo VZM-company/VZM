@@ -78,11 +78,12 @@ export class ProductComponent implements OnInit {
       this.product.Image = this.productForm.get("image").value;
       this.product.Price = this.productForm.get("price").value;
       this.product.Title = this.productForm.get("title").value;
+      this.product.UserId = this.userService.user["userId"];
 
       let option = this.product.ProductId.trim() == '' ? "/create" : "/update";
       console.log(this.product);
       console.log(this.userService.user);
-      this.api.post(this.apiUrl + option, { product: this.product, user: this.userService.user }).subscribe(result => {
+      this.api.post(this.apiUrl + option, { ...this.product, /*user: this.userService.user*/ }).subscribe(result => {
         console.log(result);
         //this.userService.setUser(result)
       }, error => console.error(error));
