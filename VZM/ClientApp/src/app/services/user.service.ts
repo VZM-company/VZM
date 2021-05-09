@@ -1,6 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AppStorageService } from '../core/app-storage.service';
 
+export interface productModel {
+  ProductId: string,
+  SellerId: string,
+  Title: string,
+  MetaTitle: string,
+  Price: number,
+  Description: string,
+  DescriptionShort: string,
+  Image: string,
+};
+
 @Injectable()
 export class UserService {
     user: Object;

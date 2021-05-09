@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UserService, productModel } from '../services/user.service';
 
 @Component({
   templateUrl: './profile.component.html',
@@ -38,10 +41,26 @@ export class ProfileComponent implements OnInit {
     description: "Lorem ipsum hey...",
   }
 
-  constructor(
+  api: HttpClient;
+  baseUrl: string;
+  userService: UserService;
+  apiUrl: string;
+  products: productModel[];
 
+  constructor(
+    userService: UserService,
+    router: ActivatedRoute,
+    @Inject('BASE_URL') baseUrl: string,
+    api: HttpClient,
   ) {
-    
+    this.api = api;
+    this.baseUrl = baseUrl;
+    this.userService = userService;
+    this.apiUrl = this.baseUrl + 'api/user';
+
+    this.api.post(this.apiUrl + '/products', { "userId": this.userService.getUser()['userId']}).subscribe(result => {
+      console.log(result);
+    }, error => console.error(error));
   }
 
   ngOnInit(): void {

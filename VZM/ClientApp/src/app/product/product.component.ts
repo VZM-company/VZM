@@ -2,19 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { UserService } from '../services/user.service';
+import { UserService, productModel } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
-
-interface productModel {
-  ProductId: string,
-  SellerId: string,
-  Title: string,
-  MetaTitle: string,
-  Price: number,
-  Description: string,
-  DescriptionShort: string,
-  Image: string,
-};
 
 @Component({
   templateUrl: './product.component.html',
