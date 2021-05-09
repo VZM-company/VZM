@@ -9,7 +9,7 @@ export interface productModel {
   Price: number,
   Description: string,
   DescriptionShort: string,
-  Image: string,
+  ImageUrl: string,
 };
 
 @Injectable()

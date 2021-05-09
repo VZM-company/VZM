@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { UserService, productModel } from '../services/user.service';
 
@@ -16,28 +17,28 @@ export class ProfileComponent implements OnInit {
     actualPrice: 120,
     left: '12:21',
     discount: 10,
-    image: "",
+    imageUrl: "",
   }, {
     name: "rewfasdv",
     price: 121,
     actualPrice: 115,
     left: '20:30',
       discount: 5,
-      image: "",
+      imaimageUrlge: "",
   }, {
     name: "aegaerg",
     price: 152,
     actualPrice: 135,
     left: '12:00',
       discount: 12,
-      image: "",
+      imageUrl: "",
   }, {
     name: "asfawer",
     actualPrice: 460,
     price: 412,
     left: '10:11',
       discount: 11,
-      image: "",
+      imageUrl: "",
     }];
 
   profile = {
@@ -51,19 +52,25 @@ export class ProfileComponent implements OnInit {
   userService: UserService;
   apiUrl: string;
   products: productModel[];
+  sanitizer: DomSanitizer;
 
   constructor(
     userService: UserService,
     router: ActivatedRoute,
     @Inject('BASE_URL') baseUrl: string,
     api: HttpClient,
+    sanitizer: DomSanitizer
   ) {
     this.api = api;
     this.baseUrl = baseUrl;
     this.userService = userService;
     this.apiUrl = this.baseUrl + 'api/user';
+    this.sanitizer = sanitizer;
+    
+  }
 
-    this.api.post(this.apiUrl + '/products', { "userId": this.userService.getUser()['userId']}).subscribe(result => {
+  ngOnInit(): void {
+    this.api.post(this.apiUrl + '/products', { "userId": this.userService.getUser()['userId'] }).subscribe(result => {
       console.log(result);
       this.items = [];
       for (let item of result as []) {
@@ -76,13 +83,9 @@ export class ProfileComponent implements OnInit {
           left: "10:10",
           name: item['title'],
           price: item['price'],
-          image: item['image'],
+          imageUrl: this.sanitizer.bypassSecurityTrustResourceUrl(item['imageUrl']) as string,
         })
       }
     }, error => console.error(error));
-  }
-
-  ngOnInit(): void {
-      
   }
 }

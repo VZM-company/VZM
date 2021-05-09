@@ -22,7 +22,7 @@
   <div class="app-cards">
     <mat-card class="app-card" *ngFor="let item of items; let i = index">
       <div class="app-card__image">
-        <img [src]="item.image" alt="Alternate Text" />
+        <img [src]="item.imageUrl" alt="Alternate Text" />
       </div>
       <div class="app-card__description">
         <span class="description__name">{{item.name}}</span> <br />

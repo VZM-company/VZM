@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
     price: new FormControl(""),
     description: new FormControl(""),
     descriptionShort: new FormControl(""),
-    image: new FormControl(""),
+    imageUrl: new FormControl(""),
   });
   
   api: HttpClient;
@@ -49,11 +49,11 @@ export class ProductComponent implements OnInit {
       }
     })
 
-    this.product = { Description: "", DescriptionShort: "", Image: "", MetaTitle: "", Price: 0, ProductId: "", Title: "", SellerId: "" };
+    this.product = { Description: "", DescriptionShort: "", ImageUrl: "", MetaTitle: "", Price: 0, ProductId: "", Title: "", SellerId: "" };
     this.productForm.get("descriptionShort").setValue("descriptionShort");
     this.productForm.get("description").setValue("description of product");
     this.productForm.get("metaTitle").setValue("metaTitle of product");
-    this.productForm.get("image").setValue("");
+    this.productForm.get("imageUrl").setValue("");
     this.productForm.get("price").setValue("122");
     this.productForm.get("title").setValue("title of product");
   }
@@ -64,7 +64,7 @@ export class ProductComponent implements OnInit {
       this.product.DescriptionShort = this.productForm.get("descriptionShort").value;
       this.product.Description = this.productForm.get("description").value;
       this.product.MetaTitle = this.productForm.get("metaTitle").value;
-      this.product.Image = this.productForm.get("image").value;
+      this.product.ImageUrl = this.productForm.get("imageUrl").value;
       this.product.Price = this.productForm.get("price").value;
       this.product.Title = this.productForm.get("title").value;
       this.product.SellerId = this.userService.getUser()['userId'];
@@ -82,14 +82,14 @@ export class ProductComponent implements OnInit {
   }
 
   deleteImage() {
-    this.productForm.get("image").setValue("");
+    this.productForm.get("imageUrl").setValue("");
   }
 
   uploadImage(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.productForm.get("image").setValue(reader.result);
+      this.productForm.get("imageUrl").setValue(reader.result);
     };
   }
 

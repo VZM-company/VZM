@@ -100,14 +100,20 @@
   background-color: rgba(0,0,0,0.2)
 }
 
-.app-card__description {
-  min-height: 60px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: center;
+.app-card__image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
+
+.app-card__description {
+    min-height: 60px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
 .description__discount {
   text-decoration: line-through;
