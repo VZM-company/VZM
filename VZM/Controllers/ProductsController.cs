@@ -22,9 +22,14 @@ namespace VZM.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Product> Post(Product product)
         {
-            product.SellerId = _dataManager.AuthorizedUser.UserId;
-            _dataManager.Products.SaveProduct(product);
-            return Ok(product);
+            if(_dataManager.AuthorizedUser?.UserId != null)
+            {
+                product.SellerId = _dataManager.AuthorizedUser.UserId;
+                _dataManager.Products.SaveProduct(product);
+                return Ok(product);
+            }
+
+            return BadRequest();
         } 
     }
 }
