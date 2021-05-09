@@ -16,6 +16,8 @@ import { AuthComponent } from './auth/auth.component'
 import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { UserService } from './services/user.service';
+import { AppStorageService } from './core/app-storage.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,7 @@ import { SearchComponent } from './search/search.component';
     MatIconModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [UserService, AppStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

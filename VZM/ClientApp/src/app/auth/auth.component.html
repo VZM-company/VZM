@@ -15,21 +15,25 @@
         </form>
       </mat-tab>
       <mat-tab label="Регистрация">
-        <form action="/" method="post" [formGroup]="registerForm">
+        <form method="post" (ngSubmit)="register()" [formGroup]="registerForm">
           <mat-form-field>
             <mat-label>Nickname</mat-label>
-            <input required matInput formControlName="nickname" name="nickname">
+            <input required matInput formControlName="username" name="username">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Email</mat-label>
             <input required matInput formControlName="email" name="email">
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Категория</mat-label>
-            <mat-select required formControlName="type" name="type">
-              <mat-option [value]="customer">Пользователь</mat-option>
-              <mat-option [value]="company">Компания</mat-option>
+            <mat-label>Роль</mat-label>
+            <mat-select required formControlName="role" name="role">
+              <mat-option value="customer">Пользователь</mat-option>
+              <mat-option value="company">Компания</mat-option>
             </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Имя</mat-label>
+            <input required matInput formControlName="name" name="name">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Password</mat-label>
