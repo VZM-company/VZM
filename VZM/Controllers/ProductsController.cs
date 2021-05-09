@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VZM.Data;
 using VZM.Entities;
+using System;
 
 namespace VZM.Controllers
 {
@@ -15,15 +16,6 @@ namespace VZM.Controllers
             _dataManager = dataManager;
         }
 
-        [HttpGet]
-        [Route("create")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public string Get(Product product)
-        {
-            return "STRING!!!";
-        }
-
         // POST: api/products/create
         [HttpPost]
         [Route("create")]
@@ -34,6 +26,8 @@ namespace VZM.Controllers
             if(_dataManager.AuthorizedUser?.UserId != null)
             {
                 product.SellerId = _dataManager.AuthorizedUser.UserId;
+                product.CreatedAt = DateTime.Now;
+                product.ImageUrl = "URL"; // TODO: re-write 
                 _dataManager.Products.SaveProduct(product);
                 return Ok(product);
             }
