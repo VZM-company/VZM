@@ -2,10 +2,10 @@
   <mat-card class="auth-form">
     <mat-tab-group>
       <mat-tab label="Вход">
-        <form action="/" method="post" [formGroup]="loginForm">
+        <form method="post" (ngSubmit)="login()" [formGroup]="loginForm">
           <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input required matInput formControlName="email" name="email">
+            <mat-label>User Name</mat-label>
+            <input required matInput formControlName="userName" name="userName">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Password</mat-label>
