@@ -36,6 +36,7 @@ namespace VZM
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<DataManager>();
+            services.AddSingleton<AuthorizedUser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

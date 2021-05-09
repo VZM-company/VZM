@@ -68,6 +68,7 @@ namespace VZM.Controllers
             }
             else
             {
+                _dataManager.AuthorizedUser.UserId = user.UserId;
                 return Ok(user);
             }
         }
