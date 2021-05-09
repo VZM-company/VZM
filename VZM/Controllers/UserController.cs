@@ -78,16 +78,16 @@ namespace VZM.Controllers
         [Route("products")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<Product>> Get(string id)
+        public ActionResult<IEnumerable<Product>> Get(User u)
         {
 
-            var user = _dataManager.Users.GetUser(Guid.Parse(id));
+            var user = _dataManager.Users.GetUser(u.UserId);
             if(user == null)
             {
                 return NotFound();
             }
             
-            var role = _dataManager.Roles.GetRoleById(user.RoleId.ToString());
+            var role = _dataManager.Roles.GetRoleById((Guid)user.RoleId);
             if(role.Name == "company")
             {
                 return Ok(_dataManager.Products.GetProductsBySeller(user));

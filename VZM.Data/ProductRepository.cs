@@ -144,7 +144,7 @@ namespace VZM.Data
                 Description = record.GetString(5),
                 DescriptionShort = record.GetString(6),
                 ImageUrl = record.GetString(7),
-                SellerId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(9),
+                SellerId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(8),
             };
 
             return product;
