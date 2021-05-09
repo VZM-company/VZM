@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 interface productModel {
   ProductId: string,
-  UserId: string,
+  SellerId: string,
   Title: string,
   MetaTitle: string,
   Price: number,
@@ -60,11 +60,11 @@ export class ProductComponent implements OnInit {
       }
     })
 
-    this.product = { Description: "", DescriptionShort: "", Image: "", MetaTitle: "", Price: 0, ProductId: "", Title: "", UserId: "" };
+    this.product = { Description: "", DescriptionShort: "", Image: "", MetaTitle: "", Price: 0, ProductId: "", Title: "", SellerId: "" };
     this.productForm.get("descriptionShort").setValue("descriptionShort");
     this.productForm.get("description").setValue("description of product");
     this.productForm.get("metaTitle").setValue("metaTitle of product");
-    this.productForm.get("image").setValue("image of product");
+    this.productForm.get("image").setValue("");
     this.productForm.get("price").setValue("122");
     this.productForm.get("title").setValue("title of product");
   }
@@ -78,7 +78,7 @@ export class ProductComponent implements OnInit {
       this.product.Image = this.productForm.get("image").value;
       this.product.Price = this.productForm.get("price").value;
       this.product.Title = this.productForm.get("title").value;
-      this.product.UserId = this.userService.getUser()['userId'];
+      this.product.SellerId = this.userService.getUser()['userId'];
       this.product.ProductId = "00000000-0000-0000-0000-000000000000";
 
 
@@ -92,6 +92,17 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  deleteImage() {
+    this.productForm.get("image").setValue("");
+  }
+
+  uploadImage(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.productForm.get("image").setValue(reader.result);
+    };
+  }
 
   ngOnInit(): void {
       

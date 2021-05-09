@@ -23,3 +23,19 @@ form {
 .mat-stroked-button {
   width: 100%;
 }
+
+.image {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.image > label,
+.image{
+  cursor: pointer;
+}
+
+.image__delete {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}

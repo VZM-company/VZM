@@ -25,7 +25,7 @@ namespace VZM.Controllers
         {
             if(_dataManager.AuthorizedUser?.UserId != null)
             {
-                product.SellerId = _dataManager.AuthorizedUser.UserId;
+                //product.SellerId = _dataManager.AuthorizedUser.UserId;
                 product.CreatedAt = DateTime.Now;
                 product.ImageUrl = "URL"; // TODO: re-write 
                 _dataManager.Products.SaveProduct(product);

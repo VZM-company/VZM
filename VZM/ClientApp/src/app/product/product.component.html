@@ -22,10 +22,17 @@ Current user : <span>{{userService.getUser() | json}}</span>
         <mat-label>DescriptionShort</mat-label>
         <input required matInput formControlName="descriptionShort" name="descriptionShort">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Image</mat-label>
-        <input required matInput formControlName="image" name="image">
-      </mat-form-field>
+      <!--<mat-form-field>
+    <mat-label>Image</mat-label>
+    <input required matInput formControlName="image" name="image">
+  </mat-form-field>-->
+      <mat-card class="image">
+        <label *ngIf="productForm.get('image').value == ''" for="image">Choose image</label>
+        <img *ngIf="productForm.get('image').value != ''" [src]="productForm.get('image').value" alt="Product image" />
+        <button class="image__delete" *ngIf="productForm.get('image').value != ''" (click)="deleteImage()" mat-icon-button><mat-icon>delete</mat-icon></button>
+      </mat-card>
+      <input (change)="uploadImage($event.target.files[0])" id="image" style="visibility: hidden;" type="file" name="name" value="" />
+
       <button mat-stroked-button color="primary" type="submit">{{product.id ? "Update" : "Create"}}</button>
     </form>
   </mat-card>
