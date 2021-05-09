@@ -21,7 +21,7 @@ namespace VZM.Data
 
         public void DeleteUser(Guid id)
         {
-            var sql = "DELETE FROM User WHERE UserId = @UserId";
+            var sql = "DELETE FROM [User] WHERE UserId = @UserId";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
@@ -34,7 +34,7 @@ namespace VZM.Data
 
         public User GetUser(Guid id)
         {
-            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM User WHERE UserId = @UserId";
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM [User] WHERE UserId = @UserId";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
@@ -57,7 +57,7 @@ namespace VZM.Data
 
         public IEnumerable<User> GetUsers()
         {
-            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM User";
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM [User]";
             var cmd = new SqlCommand(sql, _connection);
 
             var result = new List<User>();
@@ -81,14 +81,14 @@ namespace VZM.Data
 
             if (user.UserId == default)
             {
-                sql = "INSERT INTO User (UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId)" +
+                sql = "INSERT INTO [User] (UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId)" +
 " VALUES (@UserId, @Name, @Username, @PasswordHash, @Email, @CreatedAt, @Info, @Confirmed, @RoleId)";
 
                 user.UserId = Guid.NewGuid();
             }
             else
             {
-                sql = "UPDATE Product SET Name = @Name, Username = @Username, PasswordHash = @PasswordHash, Email = @Email, CreatedAt = @CreatedAt, Info = @Info, Confirmed = @Confirmed, RoleId = @RoleId WHERE UserId = @UserId";
+                sql = "UPDATE [User] SET Name = @Name, Username = @Username, PasswordHash = @PasswordHash, Email = @Email, CreatedAt = @CreatedAt, Info = @Info, Confirmed = @Confirmed, RoleId = @RoleId WHERE UserId = @UserId";
             }
 
             var cmd = new SqlCommand(sql, _connection);
@@ -152,17 +152,47 @@ namespace VZM.Data
 
         public void ChangeRole(Guid userId, string roleName)
         {
-            throw new NotImplementedException();
+            var sql1 = "Select RoleId FROM [Role] WHERE Name = @RoleName";
+            var cmd1 = new SqlCommand(sql1, _connection);
+
+            cmd1.Parameters.Add("@RoleName", SqlDbType.NVarChar);
+            cmd1.Parameters["@RoleName"].Value = roleName;
+
+            var sql2 = "UPDATE [User] SET RoleId = @RoleId WHERE UserId = @UserId";
+            var cmd2 = new SqlCommand(sql2, _connection);
+
+            cmd2.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
+            cmd2.Parameters["@UserId"].Value = userId;
+
+            _connection.Open();
+            var roleId = (Guid)cmd1.ExecuteScalar();
+
+            cmd2.Parameters.Add("@RoleId", SqlDbType.UniqueIdentifier);
+            cmd2.Parameters["@RoleId"].Value = roleId;
+
+            cmd2.ExecuteNonQuery();
+
+            _connection.Close();
         }
 
         public string GetRole(Guid userId)
         {
-            throw new NotImplementedException();
+            var sql = "Select R.[Name] FROM [User] AS U JOIN Role AS R ON U.[RoleId] = R.[RoleId] WHERE U.[UserId]= @UserId";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@UserId"].Value = userId;
+
+            _connection.Open();
+            var roleName = (string)cmd.ExecuteScalar();
+            _connection.Close();
+
+            return roleName;
         }
 
         public User GetUserByUsername(string userName)
         {
-            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM User WHERE Username = @Username";
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM [User] WHERE Username = @Username";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@Username", SqlDbType.NVarChar);
