@@ -71,7 +71,11 @@ export class AuthComponent implements OnInit {
     }
 
     if (this.registerForm.valid) {
+<<<<<<< HEAD
       this.api.post(this.apiUrl + "/register", { user: newUser }).subscribe(result => {
+=======
+      this.api.post<{}[]>(this.apiUrl + "/register", { ...newUser }).subscribe(result => {
+>>>>>>> 4b67870ca2b371554812ecd53d4a28ec78cd351e
         console.log(result);
         this.userService.setUser(result)
       }, error => console.error(error));

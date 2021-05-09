@@ -34,6 +34,7 @@ namespace VZM
 
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<DataManager>();
         }
 

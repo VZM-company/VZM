@@ -71,5 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Db.publish.xml" />
+    <None Include="Scripts\Roles.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

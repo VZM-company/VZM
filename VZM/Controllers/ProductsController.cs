@@ -17,15 +17,25 @@ namespace VZM.Controllers
             _dataManager = dataManager;
         }
 
-        // GET: api/<ProductController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET api/<ProductController>/{guid}
+        [HttpGet("id")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<Product>> Get(string id)
         {
-            return new string[] { "value1", "value2" };
+            var user = _dataManager.Users.GetUser(Guid.Parse(id)); //
+            var products = _dataManager.Products.GetProductsByUser(user);
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
         }
 
-        // GET api/<ProductController>/5
-        [HttpGet("{id}")]
+        // GET api/<ProductController>/product/{guid}
+        [HttpGet("id")]
+        [Route("product")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Product> Get(string id)
