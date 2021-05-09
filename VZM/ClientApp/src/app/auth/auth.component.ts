@@ -52,11 +52,13 @@ export class AuthComponent implements OnInit {
   login() {
     let userName = this.loginForm.get("userName").value;
     let password = this.loginForm.get("password").value;
-    
-    this.api.post<{}[]>(this.apiUrl + "/login", { "UserName": userName, "Password": password }).subscribe(result => {
-      console.log(result);
-      //this.userService.setUser(result)
-    }, error => console.error(error));
+
+    if (this.loginForm.valid) {
+      this.api.post<{}[]>(this.apiUrl + "/login", { "UserName": userName, "Password": password }).subscribe(result => {
+        console.log(result);
+        //this.userService.setUser(result)
+      }, error => console.error(error));
+    }
   }
 
   register() {
@@ -68,12 +70,13 @@ export class AuthComponent implements OnInit {
       Name: this.registerForm.get("name").value,
     }
 
-    this.api.post<{}[]>(this.apiUrl + "/register", { user: newUser }).subscribe(result => {
-      console.log(result);
-      //this.userService.setUser(result)
-    }, error => console.error(error));
+    if (this.registerForm.valid) {
+      this.api.post<{}[]>(this.apiUrl + "/register", { user: newUser }).subscribe(result => {
+        console.log(result);
+        //this.userService.setUser(result)
+      }, error => console.error(error));
+    }
   }
-
 
 
   ngOnInit(): void {
