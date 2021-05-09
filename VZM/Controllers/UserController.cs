@@ -89,14 +89,35 @@ namespace VZM.Controllers
             }
             
             var role = _dataManager.Roles.GetRoleById((Guid)user.RoleId);
-
-            if(role.Name == "company")
+            if (role.Name == "company")
             {
-                return Ok(_dataManager.Products.GetProductsBySeller(user));
+                var obj = from prod in _dataManager.Products.GetProductsBySeller(user)
+                          let discount = _dataManager.Discounts.GetDiscount(prod.ProductId)
+                          select new
+                          {
+                              Name = prod.Title,
+                              Price = prod.Price,
+                              ImageUrl = prod.ImageUrl,
+                              Discount = discount.Value,
+                              Left = (discount.ExpiredAt - discount.CreatedAt),
+                          };
+
+                return Ok(obj);
             }
             else
             {
-                return Ok(_dataManager.Products.GetProductsByUser(user));
+                var obj = from prod in _dataManager.Products.GetProductsByUser(user)
+                          let discount = _dataManager.Discounts.GetDiscount(prod.ProductId)
+                          select new
+                          {
+                              Name = prod.Title,
+                              Price = prod.Price,
+                              ImageUrl = prod.ImageUrl,
+                              Discount = discount.Value,
+                              Left = (discount.ExpiredAt - discount.CreatedAt),
+                          };
+
+                return Ok(obj);
             }
         }
     }

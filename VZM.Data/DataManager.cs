@@ -9,13 +9,15 @@ namespace VZM.Data
         public IUserRepository Users { get; set; }
         public IRoleRepository Roles { get; set; }
         public AuthorizedUser AuthorizedUser { get; set; }
+        public IDiscountRepository Discounts { get; set; }
 
-        public DataManager(IProductRepository productRepository, IUserRepository userRepository , IRoleRepository roleRepository, AuthorizedUser authorizedUser)
+        public DataManager(IProductRepository productRepository, IUserRepository userRepository , IRoleRepository roleRepository, AuthorizedUser authorizedUser, IDiscountRepository discountRepository)
         {
             Products = productRepository;
             Users = userRepository;
             Roles = roleRepository;
             AuthorizedUser = authorizedUser;
+            Discounts = discountRepository;
         }
     }
 }
