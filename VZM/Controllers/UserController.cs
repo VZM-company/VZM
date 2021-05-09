@@ -44,7 +44,8 @@ namespace VZM.Controllers
                 Email = userArg.Email,
                 RoleId = role.RoleId,
                 Role = role,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                Info = "Add your personal info",
             };
 
             _dataManager.Users.SaveUser(newUser);

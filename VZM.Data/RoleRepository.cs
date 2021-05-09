@@ -23,10 +23,25 @@ namespace VZM.Data
             cmd.Parameters["@Name"].Value = title;
 
             _connection.Open();
-            var roleName = (Role)cmd.ExecuteScalar();
+            var reader = cmd.ExecuteReader();
+            reader.Read();
+
+            var role = PopulateFromRecord(reader);
             _connection.Close();
 
-            return roleName;
+            return role;
+        }
+
+        private static Role PopulateFromRecord(IDataRecord record)
+        {
+            var role = new Role
+            {
+                RoleId = record.GetGuid(0),
+                Name = record.GetString(1),
+                NameShort = record.GetString(2)
+            };
+
+            return role;
         }
     }
 }
