@@ -65,7 +65,7 @@ export class ProductComponent implements OnInit {
     this.productForm.get("description").setValue("description of product");
     this.productForm.get("metaTitle").setValue("metaTitle of product");
     this.productForm.get("image").setValue("image of product");
-    this.productForm.get("price").setValue("price of product");
+    this.productForm.get("price").setValue("122");
     this.productForm.get("title").setValue("title of product");
   }
 
