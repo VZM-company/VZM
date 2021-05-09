@@ -54,9 +54,9 @@ export class AuthComponent implements OnInit {
     let password = this.loginForm.get("password").value;
 
     if (this.loginForm.valid) {
-      this.api.post<{}[]>(this.apiUrl + "/login", { "UserName": userName, "Password": password }).subscribe(result => {
+      this.api.post(this.apiUrl + "/login", { "UserName": userName, "Password": password }).subscribe(result => {
         console.log(result);
-        //this.userService.setUser(result)
+        this.userService.setUser(result)
       }, error => console.error(error));
     }
   }
@@ -71,9 +71,9 @@ export class AuthComponent implements OnInit {
     }
 
     if (this.registerForm.valid) {
-      this.api.post<{}[]>(this.apiUrl + "/register", { user: newUser }).subscribe(result => {
+      this.api.post(this.apiUrl + "/register", { user: newUser }).subscribe(result => {
         console.log(result);
-        //this.userService.setUser(result)
+        this.userService.setUser(result)
       }, error => console.error(error));
     }
   }

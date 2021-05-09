@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './services/user.service';
 import { AppStorageService } from './core/app-storage.service';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AppStorageService } from './core/app-storage.service';
     CartComponent,
     ProfileComponent,
     SearchComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,6 +46,7 @@ import { AppStorageService } from './core/app-storage.service';
       { path: 'auth', component: AuthComponent },
       { path: 'cart', component: CartComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:id', component: ProductComponent },
       { path: 'search', component: SearchComponent },
     ]),
     BrowserAnimationsModule,

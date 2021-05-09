@@ -1,0 +1,31 @@
+<section class="container">
+  <mat-card class="auth-form">
+    <form method="post" (ngSubmit)="save()" [formGroup]="productForm">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input required matInput formControlName="title" name="title">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Meta title</mat-label>
+        <input required matInput formControlName="metaTitle" name="metaTitle">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input required matInput formControlName="price" name="price">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea required matInput formControlName="description" name="description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>DescriptionShort</mat-label>
+        <input required matInput formControlName="descriptionShort" name="descriptionShort">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Image</mat-label>
+        <input required matInput formControlName="image" name="image">
+      </mat-form-field>
+      <button mat-stroked-button color="primary" type="submit">{{product.id ? "Update" : "Create"}}</button>
+    </form>
+  </mat-card>
+</section>
