@@ -32,10 +32,16 @@ namespace VZM.Data
             cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
             cmd.Parameters["@ProductId"].Value = productId;
 
+            var result = new Discount();
+
             _connection.Open();
-            var reader = cmd.ExecuteReader();
-            reader.Read();
-            var result = PopulateFromRecord(reader);
+            var reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            while (reader.Read())
+            {
+                result = PopulateFromRecord(reader);
+            }
+
+            reader.Close();
             _connection.Close();
 
             return result;
