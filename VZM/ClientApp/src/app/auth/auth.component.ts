@@ -47,6 +47,13 @@ export class AuthComponent implements OnInit {
     this.baseUrl = baseUrl;
     this.userService = userService;
     this.apiUrl = this.baseUrl + 'api/user';
+
+    this.registerForm.get("username").setValue("username test");
+    this.registerForm.get("password").setValue("123123");
+    this.registerForm.get("repeat_password").setValue("123123");
+    this.registerForm.get("role").setValue("user");
+    this.registerForm.get("email").setValue("tut@tut.tut");
+    this.registerForm.get("name").setValue("user name test");
   }
 
   login() {
@@ -71,7 +78,7 @@ export class AuthComponent implements OnInit {
     }
 
     if (this.registerForm.valid) {
-      this.api.post<{}[]>(this.apiUrl + "/register", { ...newUser }).subscribe(result => {
+      this.api.post(this.apiUrl + "/register", { ...newUser }).subscribe(result => {
         console.log(result);
         this.userService.setUser(result)
       }, error => console.error(error));
