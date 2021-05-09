@@ -79,10 +79,10 @@ export class ProductComponent implements OnInit {
       this.product.Price = this.productForm.get("price").value;
       this.product.Title = this.productForm.get("title").value;
       this.product.UserId = this.userService.getUser()['userId'];
-      this.product.ProductId = "";
+      this.product.ProductId = "00000000-0000-0000-0000-000000000000";
 
 
-      let option = this.product.ProductId.trim() == '' ? "/create" : "/update";
+      let option = this.product.ProductId.trim() == '00000000-0000-0000-0000-000000000000' ? "/create" : "/update";
       console.log(this.product);
       console.log(this.userService.user);
       this.api.post(this.apiUrl + option, { ...this.product, /*user: this.userService.user*/ }).subscribe(result => {

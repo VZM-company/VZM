@@ -15,6 +15,15 @@ namespace VZM.Controllers
             _dataManager = dataManager;
         }
 
+        [HttpGet]
+        [Route("create")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public string Get(Product product)
+        {
+            return "STRING!!!";
+        }
+
         // POST: api/products/create
         [HttpPost]
         [Route("create")]
@@ -29,7 +38,7 @@ namespace VZM.Controllers
                 return Ok(product);
             }
 
-            return BadRequest();
+            return StatusCode(500);
         } 
     }
 }

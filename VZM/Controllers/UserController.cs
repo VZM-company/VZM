@@ -73,7 +73,7 @@ namespace VZM.Controllers
             }
         }
 
-        // GET: api/User/products/{id}
+        // GET: api/user/products/{id}
         [HttpGet("id")]
         [Route("products")]
         [ProducesResponseType(StatusCodes.Status201Created)]
