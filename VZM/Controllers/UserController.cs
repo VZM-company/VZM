@@ -18,19 +18,18 @@ namespace VZM.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> Registration(User user)
+        public ActionResult<User> Post(RegistrationViewModel userArg)
         {
-            try
+            var user = _dataManager.Users.GetUserByUsername(userArg.UserName);
+            if (user != null)
             {
-                _dataManager.Users.SaveUser(user);
-                return CreatedAtAction(nameof(Registration), user);
+                return Ok(null);
             }
-            catch
-            {
-                return BadRequest();
-            }
+
+            var role = _dataManager.
         }
 
         [HttpPost]
