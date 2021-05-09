@@ -1,7 +1,7 @@
 <section class="container">
   <mat-card class="auth-form">
     <mat-tab-group>
-      <mat-tab label="Вход">
+      <mat-tab label="Log in">
         <form method="post" (ngSubmit)="login()" [formGroup]="loginForm">
           <mat-form-field>
             <mat-label>User Name</mat-label>
@@ -11,10 +11,10 @@
             <mat-label>Password</mat-label>
             <input required matInput formControlName="password" name="password">
           </mat-form-field>
-          <button mat-stroked-button color="primary" type="submit">Войти</button>
+          <button mat-stroked-button color="primary" type="submit">Log in</button>
         </form>
       </mat-tab>
-      <mat-tab label="Регистрация">
+      <mat-tab label="Sign up">
         <form method="post" (ngSubmit)="register()" [formGroup]="registerForm">
           <mat-form-field>
             <mat-label>Nickname</mat-label>
@@ -25,14 +25,14 @@
             <input required matInput formControlName="email" name="email">
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Роль</mat-label>
+            <mat-label>Role</mat-label>
             <mat-select required formControlName="role" name="role">
-              <mat-option value="customer">Пользователь</mat-option>
-              <mat-option value="company">Компания</mat-option>
+              <mat-option value="customer">User</mat-option>
+              <mat-option value="company">Company</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Имя</mat-label>
+            <mat-label>Name</mat-label>
             <input required matInput formControlName="name" name="name">
           </mat-form-field>
           <mat-form-field>
@@ -43,7 +43,7 @@
             <mat-label>Repeat password</mat-label>
             <input required matInput formControlName="repeat_password" name="repeat_password">
           </mat-form-field>
-          <button mat-stroked-button color="primary" type="submit">Зарегистрироваться</button>
+          <button mat-stroked-button color="primary" type="submit">Register</button>
         </form>
       </mat-tab>
     </mat-tab-group>

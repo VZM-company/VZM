@@ -25,19 +25,19 @@
   <aside class="filter">
     <mat-card class="filter__card">
       <form action="/" method="post" [formGroup]="filterForm">
-        <h2>Фильтр</h2>
+        <h2>Filter</h2>
         <fieldset>
           <mat-form-field class="filter__field">
-            <mat-label>От</mat-label>
+            <mat-label>From</mat-label>
             <input formControlName="from" type="text" matInput name="from" value="" />
           </mat-form-field>
           <mat-form-field class="filter__field">
-            <mat-label>До</mat-label>
+            <mat-label>To</mat-label>
             <input formControlName="to" type="text" matInput name="to" value="" />
           </mat-form-field>
         </fieldset>
         <mat-form-field class="filter__field">
-          <mat-label>Категория</mat-label>
+          <mat-label>Category</mat-label>
           <mat-select formControlName="category" [(ngModel)]="category" name="category">
             <mat-option *ngFor="let category of categories" [value]="category.value">
               {{category.name}}
