@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using VZM.Data;
 using VZM.Entities;
 using VZM.ViewModels;
@@ -29,7 +30,25 @@ namespace VZM.Controllers
                 return Ok(null);
             }
 
-            var role = _dataManager.
+            var role = _dataManager.Roles.GetRoleByTitle(userArg.Role);
+            if(role == null || userArg.Name == "" || userArg.PasswordHash == "" || userArg.UserName == "")
+            {
+                return BadRequest();
+            }
+
+            var newUser = new User()
+            {
+                Name = userArg.Name,
+                UserName = userArg.UserName,
+                PasswordHash = userArg.PasswordHash,
+                Email = userArg.Email,
+                RoleId = role.RoleId,
+                Role = role,
+                CreatedAt = DateTime.Now
+            };
+
+            _dataManager.Users.SaveUser(newUser);
+            return Ok(newUser);
         }
 
         [HttpPost]

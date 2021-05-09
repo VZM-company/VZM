@@ -8,7 +8,6 @@ namespace VZM.ViewModels
 {
     public class RegistrationViewModel:User
     {
-        public string Role;
-
+        public new string Role { get; set; }
     }
 }
