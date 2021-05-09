@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpService } from './http.service';
 import { AppStorageService } from './app-storage.service';
 
 @NgModule({
@@ -9,7 +8,6 @@ import { AppStorageService } from './app-storage.service';
     ],
     declarations: [],
     providers: [
-        HttpService,
         AppStorageService,
     ],
 })

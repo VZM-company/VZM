@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { UserService } from '../services/user.service';
-//import { HttpService } from '../core/http.service';
 
 interface userModel {
   UserName: string;

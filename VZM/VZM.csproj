@@ -25,6 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\services\auth-admin-guard.service.ts" />
+    <None Remove="ClientApp\src\app\services\auth-guest-guard.service.ts" />
+    <None Remove="ClientApp\src\app\services\auth-public-guard.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VZM.Data\VZM.Data.csproj" />
   </ItemGroup>
 
