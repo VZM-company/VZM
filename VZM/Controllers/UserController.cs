@@ -19,7 +19,7 @@ namespace VZM.Controllers
             _dataManager = dataManager;
         }
 
-        // POST: api/User/register
+        // POST: api/user/register
         [HttpPost]
         [Route("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -54,7 +54,7 @@ namespace VZM.Controllers
             return Ok(newUser);
         }
 
-        // POST: api/User/login
+        // POST: api/user/login
         [HttpPost]
         [Route("login")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -72,9 +72,9 @@ namespace VZM.Controllers
             }
         }
 
-        // GET: api/User/myProducts/{id}
+        // GET: api/User/products/{id}
         [HttpGet("id")]
-        [Route("myProducts")]
+        [Route("products")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<IEnumerable<Product>> Get(string id)
