@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VZM.Data;
 using VZM.Entities;
 using VZM.ViewModels;
@@ -88,6 +89,7 @@ namespace VZM.Controllers
             }
             
             var role = _dataManager.Roles.GetRoleById((Guid)user.RoleId);
+
             if(role.Name == "company")
             {
                 return Ok(_dataManager.Products.GetProductsBySeller(user));

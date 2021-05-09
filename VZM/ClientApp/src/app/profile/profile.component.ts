@@ -61,16 +61,17 @@ export class ProfileComponent implements OnInit {
     this.api.post(this.apiUrl + '/products', { "userId": this.userService.getUser()['userId']}).subscribe(result => {
       console.log(result);
       this.items = [];
-      for (let item in result) {
+      for (let item of result) {
+        console.log(item);
         this.items.push({
           //actualPrice: item['price'],
           //discount: item['price'],
           //left: item['price'],
-          actualPrice: 10,
+          actualPrice: 11,
           discount: 10,
           left: "10:10",
-          name: item['Title'],
-          price: item['Price'],
+          name: item['title'],
+          price: item['price'],
         })
       }
     }, error => console.error(error));
