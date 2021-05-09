@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VZM.Data;
 using VZM.Entities;
+using VZM.ViewModels;
 
 namespace VZM.Controllers
 {
@@ -33,14 +34,15 @@ namespace VZM.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> Login(string userName, string password)
+        public ActionResult<User> Post(LoginViewModel loginViewModel)
         {
-            var user = _dataManager.Users.GetUserByUsername(userName);
-            if (user == null || user.PasswordHash != password)
+            var user = _dataManager.Users.GetUserByUsername(loginViewModel.UserName);
+            if (user == null || user.PasswordHash != loginViewModel.Password)
             {
-                return NotFound();
+                return Ok(null);
             }
             else
             {

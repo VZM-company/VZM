@@ -54,7 +54,7 @@ export class AuthComponent implements OnInit {
     //  console.log(result)
     //}, error => console.error(error));
 
-    this.api.post<{}[]>(url, { "userName": userName, "pasword": password }).subscribe(result => {
+    this.api.post<{}[]>(url + "/login", { "UserName": userName, "Password": password }).subscribe(result => {
       console.log(result);
     }, error => console.error(error));
     //this.api.send(url, {}, { "userName": userName, "pasword": password }).then(res => {
