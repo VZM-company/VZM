@@ -11,3 +11,4 @@ Post-Deployment Script Template
 */
 :r .\Roles.sql
 :r .\Users.sql
+:r .\Products.sql
