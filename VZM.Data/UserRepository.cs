@@ -144,7 +144,7 @@ namespace VZM.Data
                 CreatedAt = record.GetDateTime(5),
                 Info = record.GetString(6),
                 Confirmed = record.GetBoolean(7),
-                ImageUrl = record.GetString(8),
+                ImageUrl = record.GetValue(8) == DBNull.Value ? null : record.GetString(8),
                 RoleId = record.GetValue(9) == DBNull.Value ? null : record.GetGuid(9),
             };
 
