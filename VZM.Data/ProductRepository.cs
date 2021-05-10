@@ -143,7 +143,7 @@ namespace VZM.Data
                 CreatedAt = record.GetDateTime(4),
                 Description = record.GetString(5),
                 DescriptionShort = record.GetString(6),
-                ImageUrl = record.GetString(7),
+                ImageUrl = record.GetValue(7) == DBNull.Value ? null : record.GetString(7),
                 SellerId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(8),
             };
 
@@ -269,5 +269,24 @@ namespace VZM.Data
 
             return result;
         }
+
+        /*public IEnumerable<Product> GetTopProducts(int num)
+        {
+            var sql = "SELECT ProductId FROM UserProduct ORDER BY COUNT(UserId) DESC LIMIT @NUM";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@NUM", SqlDbType.Int);
+            cmd.Parameters["@NUM"].Value = num;
+
+            var result = new List<Product>();
+
+            _connection.Open();
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(PopulateFromRecord(reader));
+            }
+
+        }*/
     }
 }

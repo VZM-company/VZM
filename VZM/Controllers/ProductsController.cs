@@ -45,5 +45,14 @@ namespace VZM.Controllers
 
             return Ok(product);
         }
+
+        // GET: api/products/{id}
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            var product = _dataManager.Products.GetProduct(id);
+            return Ok(product);
+        }
     }
 }
