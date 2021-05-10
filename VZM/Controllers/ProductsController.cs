@@ -32,6 +32,18 @@ namespace VZM.Controllers
             }
 
             return StatusCode(500);
-        } 
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var product = _dataManager.Products.GetProduct(id);
+            if (product.ProductId == default)
+            {
+                _dataManager.Products.DeleteProduct(id);
+            }
+
+            return Ok(product);
+        }
     }
 }

@@ -70,6 +70,11 @@ namespace VZM.Controllers
             else
             {
                 _dataManager.AuthorizedUser.UserId = user.UserId;
+                if (user.RoleId != null)
+                {
+                    user.Role = _dataManager.Roles.GetRoleById((Guid)user.RoleId);
+                }
+
                 return Ok(user);
             }
         }
