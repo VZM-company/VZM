@@ -21,7 +21,15 @@ namespace VZM.Data
 
         public void DeleteDiscount(Guid discountId)
         {
-            throw new NotImplementedException();
+            var sql = "DELETE FROM Discount WHERE DiscountId = @DiscountId";
+            var cmd = new SqlCommand(sql, _connection);
+
+            cmd.Parameters.Add("@DiscountId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@DiscountId"].Value = discountId;
+
+            _connection.Open();
+            cmd.ExecuteNonQuery();
+            _connection.Close();
         }
 
         public Discount GetDiscount(Guid productId)
@@ -49,7 +57,27 @@ namespace VZM.Data
 
         public void SaveDiscount(Discount discount)
         {
-            throw new NotImplementedException();
+            var sql = "";
+
+            if (discount.DiscountId == default)
+            {
+                sql = "INSERT INTO Discount (DiscountId, Value, CreatedAt, ExpiredAt, ProductId)" +
+                      "VALUES (@DiscountId, @Value, @CreatedAt, @ExpiredAt, @ProductId)";
+
+                discount.DiscountId = Guid.NewGuid();
+            }
+            else
+            {
+                sql = "UPDATE Product SET Value = @Value, CreatedAt = @CreatedAt, ExpiredAt = @ExpiredAt, ProductId = @ProductID WHERE DiscountId = @DiscountId";
+            }
+
+            var cmd = new SqlCommand(sql, _connection);
+
+            PopulateParametres(cmd, discount);
+
+            _connection.Open();
+            cmd.ExecuteNonQuery();
+            _connection.Close();
         }
 
         private static Discount PopulateFromRecord(IDataRecord record)
@@ -64,6 +92,26 @@ namespace VZM.Data
             };
 
             return discount;
+        }
+
+        private static void PopulateParametres(SqlCommand cmd, Discount discount)
+        {
+            cmd.Parameters.Clear();
+
+            cmd.Parameters.Add("@DiscountId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@DiscountId"].Value = discount.DiscountId;
+
+            cmd.Parameters.Add("@Value", SqlDbType.Float);
+            cmd.Parameters["@Value"].Value = discount.Value;
+
+            cmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime);
+            cmd.Parameters["@CreatedAt"].Value = discount.CreatedAt;
+
+            cmd.Parameters.Add("@ExpiredAt", SqlDbType.DateTime);
+            cmd.Parameters["@ExpiredAt"].Value = discount.ExpiredAt;
+
+            cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
+            cmd.Parameters["@ProductId"].Value = discount.ProductId;
         }
     }
 }
