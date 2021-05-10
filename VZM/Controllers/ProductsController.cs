@@ -55,8 +55,9 @@ namespace VZM.Controllers
             return Ok(product);
         }
 
-        // POST: api/products/{id}
+        // POST: api/products/update
         [HttpPut]
+        [Route("update")]
         public IActionResult Put(Product product)
         {
             if (product.SellerId != _dataManager.AuthorizedUser.UserId)
