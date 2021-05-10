@@ -100,7 +100,7 @@ namespace VZM.Controllers
                               ImageUrl = prod.ImageUrl,
                               ActualPrice = prod.Price - prod.Price * discount.Value / 100, 
                               Discount = discount.Value,
-                              Left = (discount.ExpiredAt - discount.CreatedAt),
+                              Left = (discount.ExpiredAt - discount.CreatedAt).Days,
                           };
 
                 return Ok(obj);
@@ -116,7 +116,7 @@ namespace VZM.Controllers
                               ImageUrl = prod.ImageUrl,
                               ActualPrice = prod.Price - prod.Price * discount.Value / 100,
                               Discount = discount.Value,
-                              Left = (discount.ExpiredAt - discount.CreatedAt),
+                              Left = (discount.ExpiredAt - discount.CreatedAt).Days,
                           };
 
                 return Ok(obj);
