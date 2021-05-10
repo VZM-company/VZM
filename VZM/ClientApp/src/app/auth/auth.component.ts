@@ -10,6 +10,7 @@ interface userModel {
   Email: string;
   Role: string;
   Name: string;
+  ImageUrl: string;
 }
 
 @Component({
@@ -28,7 +29,8 @@ export class AuthComponent implements OnInit {
     password: new FormControl(""),
     repeat_password: new FormControl(""),
     role: new FormControl(""),
-    name: new FormControl("")
+    name: new FormControl(""),
+    imageUrl: new FormControl(""),
   });
 
   
@@ -51,6 +53,7 @@ export class AuthComponent implements OnInit {
     this.registerForm.get("username").setValue("username test");
     this.registerForm.get("password").setValue("123123");
     this.registerForm.get("repeat_password").setValue("123123");
+    this.registerForm.get("imageUrl").setValue("");
     this.registerForm.get("role").setValue("customer");
     this.registerForm.get("email").setValue("tut@tut.tut");
     this.registerForm.get("name").setValue("user name test");
@@ -68,6 +71,18 @@ export class AuthComponent implements OnInit {
     }
   }
 
+  deleteImage() {
+    this.registerForm.get("imageUrl").setValue("");
+  }
+
+  uploadImage(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.registerForm.get("imageUrl").setValue(reader.result);
+    };
+  }
+
   register() {
     let newUser: userModel = {
       UserName: this.registerForm.get("username").value,
@@ -75,6 +90,7 @@ export class AuthComponent implements OnInit {
       Role: this.registerForm.get("role").value,
       Email: this.registerForm.get("email").value,
       Name: this.registerForm.get("name").value,
+      ImageUrl: this.registerForm.get("imageUrl").value,
     }
 
     if (this.registerForm.valid) {

@@ -43,6 +43,12 @@
             <mat-label>Repeat password</mat-label>
             <input required matInput formControlName="repeat_password" name="repeat_password">
           </mat-form-field>
+          <mat-card class="image">
+            <label *ngIf="registerForm.get('imageUrl').value == ''" for="imageUrl">Choose image</label>
+            <img *ngIf="registerForm.get('imageUrl').value != ''" [src]="registerForm.get('imageUrl').value" alt="Product image" />
+            <button class="image__delete" *ngIf="registerForm.get('imageUrl').value != ''" (click)="deleteImage()" mat-icon-button><mat-icon>delete</mat-icon></button>
+          </mat-card>
+          <input (change)="uploadImage($event.target.files[0])" id="imageUrl" style="visibility: hidden;" type="file" name="name" value="" />
           <button mat-stroked-button color="primary" type="submit">Register</button>
         </form>
       </mat-tab>

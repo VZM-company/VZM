@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
   apiUrl: string;
   products: productModel[];
   sanitizer: DomSanitizer;
+  isSeller: boolean;
 
   constructor(
     userService: UserService,
@@ -66,7 +67,8 @@ export class ProfileComponent implements OnInit {
     this.userService = userService;
     this.apiUrl = this.baseUrl + 'api/user';
     this.sanitizer = sanitizer;
-    
+    console.log(this.userService.getUser());
+
   }
 
   ngOnInit(): void {
@@ -74,13 +76,15 @@ export class ProfileComponent implements OnInit {
       console.log(result);
       this.items = [];
       for (let item of result as []) {
+        let days = item['left']['days'] as number;
+        let daysString = days == 0 ? '' : `${days} day${days > 1 ? 's' : ''} left`;
         this.items.push({
           //actualPrice: item['price'],
           //discount: item['price'],
           //left: item['price'],
           actualPrice: item['actualPrice'],
           discount: item['discount'],
-          left: new Date(item['left']['milliseconds']).toLocaleString(),
+          left: daysString,
           name: item['title'],
           price: item['price'],
           imageUrl: this.sanitizer.bypassSecurityTrustResourceUrl(item['imageUrl']) as string,
