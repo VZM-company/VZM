@@ -37,7 +37,7 @@ namespace VZM.Data
             cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
             cmd.Parameters["@UserId"].Value = id;
 
-            var result = new User();
+            User result = null;
 
             _connection.Open();
             var reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
