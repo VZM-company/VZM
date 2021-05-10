@@ -49,6 +49,7 @@ namespace VZM.Controllers
                 Role = role,
                 CreatedAt = DateTime.Now,
                 Info = "Add your personal info",
+                ImageUrl = userArg.ImageUrl,
             };
 
             _dataManager.Users.SaveUser(newUser);
