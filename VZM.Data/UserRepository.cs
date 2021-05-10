@@ -79,7 +79,7 @@ namespace VZM.Data
             if (user.UserId == default)
             {
                 sql = "INSERT INTO [User] (UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, ImageUrl, RoleId)" +
-" VALUES (@UserId, @Name, @Username, @PasswordHash, @Email, @CreatedAt, @Info, @Confirmed, @ImageUrl @RoleId)";
+" VALUES (@UserId, @Name, @Username, @PasswordHash, @Email, @CreatedAt, @Info, @Confirmed, @ImageUrl, @RoleId)";
 
                 user.UserId = Guid.NewGuid();
             }
