@@ -60,12 +60,14 @@ namespace VZM.Controllers
         [Route("update")]
         public IActionResult Put(Product product)
         {
-            if (product.SellerId != _dataManager.AuthorizedUser.UserId)
+            var oldProduct = _dataManager.Products.GetProduct(product.ProductId);
+            if (product.SellerId != _dataManager.AuthorizedUser.UserId || oldProduct == null)
             {
                 return StatusCode(500);
             }
             else
             {
+                product.CreatedAt = oldProduct.CreatedAt;
                 _dataManager.Products.SaveProduct(product);
             }
 
