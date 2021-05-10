@@ -55,6 +55,20 @@ namespace VZM.Controllers
             return Ok(product);
         }
 
-        // POST: api/priducts/{id}
+        // POST: api/products/{id}
+        [HttpPut]
+        public IActionResult Put(Product product)
+        {
+            if (product.SellerId != _dataManager.AuthorizedUser.UserId)
+            {
+                return StatusCode(500);
+            }
+            else
+            {
+                _dataManager.Products.SaveProduct(product);
+            }
+
+            return Ok(product);
+        }
     }
 }
