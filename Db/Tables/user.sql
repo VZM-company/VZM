@@ -8,6 +8,7 @@
  [CreatedAt] datetime NOT NULL,
  [Info] varchar(250) NOT NULL,
  [Confirmed] bit NOT NULL,
+ [ImageUrl] nvarchar(MAX),
  [RoleId] uniqueidentifier NOT NULL,
 
 

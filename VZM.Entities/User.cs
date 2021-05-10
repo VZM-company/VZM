@@ -13,6 +13,7 @@ namespace VZM.Entities
         public DateTime CreatedAt { get; set; }
         public string Info { get; set; }
         public bool Confirmed { get; set; }
+        public string ImageUrl { get; set; }
 
         public Guid? RoleId { get; set; } = null;
         public Role Role { get; set; }

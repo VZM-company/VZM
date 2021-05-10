@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VZM.Entities;
 using VZM.Interfaces;
 
@@ -34,7 +31,7 @@ namespace VZM.Data
 
         public User GetUser(Guid id)
         {
-            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM [User] WHERE UserId = @UserId";
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, ImageUrl, RoleId FROM [User] WHERE UserId = @UserId";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
@@ -57,7 +54,7 @@ namespace VZM.Data
 
         public IEnumerable<User> GetUsers()
         {
-            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM [User]";
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, ImageUrl, RoleId FROM [User]";
             var cmd = new SqlCommand(sql, _connection);
 
             var result = new List<User>();
@@ -81,14 +78,14 @@ namespace VZM.Data
 
             if (user.UserId == default)
             {
-                sql = "INSERT INTO [User] (UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId)" +
-" VALUES (@UserId, @Name, @Username, @PasswordHash, @Email, @CreatedAt, @Info, @Confirmed, @RoleId)";
+                sql = "INSERT INTO [User] (UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, ImageUrl, RoleId)" +
+" VALUES (@UserId, @Name, @Username, @PasswordHash, @Email, @CreatedAt, @Info, @Confirmed, @ImageUrl @RoleId)";
 
                 user.UserId = Guid.NewGuid();
             }
             else
             {
-                sql = "UPDATE [User] SET Name = @Name, Username = @Username, PasswordHash = @PasswordHash, Email = @Email, CreatedAt = @CreatedAt, Info = @Info, Confirmed = @Confirmed, RoleId = @RoleId WHERE UserId = @UserId";
+                sql = "UPDATE [User] SET Name = @Name, Username = @Username, PasswordHash = @PasswordHash, Email = @Email, CreatedAt = @CreatedAt, Info = @Info, Confirmed = @Confirmed, ImageUrl = @ImageUrl, RoleId = @RoleId WHERE UserId = @UserId";
             }
 
             var cmd = new SqlCommand(sql, _connection);
@@ -128,6 +125,9 @@ namespace VZM.Data
             cmd.Parameters.Add("@Confirmed", SqlDbType.Bit);
             cmd.Parameters["@Confirmed"].Value = user.Confirmed;
 
+            cmd.Parameters.Add("@ImageUrl", SqlDbType.NVarChar);
+            cmd.Parameters["@ImageUrl"].Value = user.ImageUrl;
+
             cmd.Parameters.Add("@RoleId", SqlDbType.UniqueIdentifier);
             cmd.Parameters["@RoleId"].Value = user.RoleId is null ? DBNull.Value : user.RoleId;
         }
@@ -144,7 +144,8 @@ namespace VZM.Data
                 CreatedAt = record.GetDateTime(5),
                 Info = record.GetString(6),
                 Confirmed = record.GetBoolean(7),
-                RoleId = record.GetValue(8) == DBNull.Value ? null : record.GetGuid(8),
+                ImageUrl = record.GetString(8),
+                RoleId = record.GetValue(9) == DBNull.Value ? null : record.GetGuid(9),
             };
 
             return user;
@@ -192,7 +193,7 @@ namespace VZM.Data
 
         public User GetUserByUsername(string userName)
         {
-            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, RoleId FROM [User] WHERE Username = @Username";
+            var sql = "SELECT UserId, Name, Username, PasswordHash, Email, CreatedAt, Info, Confirmed, ImageUrl, RoleId FROM [User] WHERE Username = @Username";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@Username", SqlDbType.NVarChar);
