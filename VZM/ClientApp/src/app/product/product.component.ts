@@ -46,6 +46,7 @@ export class ProductComponent implements OnInit {
       } else {
         // updating
         this.product.ProductId = id;
+        
       }
     })
 

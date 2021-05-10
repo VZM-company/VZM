@@ -1,7 +1,7 @@
 <section class="container">
   <mat-card class="profile-item">
     <div class="profile-item__image">
-      <!--<img [src]="" alt="Alternate Text" />-->
+      <img [src]="userService.getUser()['imageUrl']" alt="Alternate Text" />
     </div>
     <article class="detail__buy">
       <h2>{{userService.getUser()['name']}}</h2>
@@ -17,7 +17,7 @@
       <div class="app-card__image">
         <img [src]="item.imageUrl" alt="Alternate Text" />
       </div>
-      <div class="app-card__description">
+      <div class="app-card__description" (click)="toDetail(item.ProductId)">
         <span class="description__name">{{item.name}}</span> <br />
         <span class="description__price">PRICE: <span class="description__price-discount">{{item.price}}</span> <strong class="description__actualPrice">{{item.actualPrice}}</strong></span>
         <span class="description__left">LEFT: {{item.left}}</span>

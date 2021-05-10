@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService, productModel } from '../services/user.service';
 
 @Component({
@@ -54,10 +54,11 @@ export class ProfileComponent implements OnInit {
   products: productModel[];
   sanitizer: DomSanitizer;
   isSeller: boolean;
+  router: Router;
 
   constructor(
     userService: UserService,
-    router: ActivatedRoute,
+    router: Router,
     @Inject('BASE_URL') baseUrl: string,
     api: HttpClient,
     sanitizer: DomSanitizer
@@ -67,18 +68,22 @@ export class ProfileComponent implements OnInit {
     this.userService = userService;
     this.apiUrl = this.baseUrl + 'api/user';
     this.sanitizer = sanitizer;
-    console.log(this.userService.getUser());
+    this.router = router;
 
+  }
+
+  toDetail(ProductId) {
+    this.router.navigate(['/profile/', ProductId]);
   }
 
   ngOnInit(): void {
     this.api.post(this.apiUrl + '/products', { "userId": this.userService.getUser()['userId'] }).subscribe(result => {
-      console.log(result);
-      this.items = [];
+      let items: any[] = [];
+      console.log("qwerqwer", result);
       for (let item of result as []) {
         let days = item['left']['days'] as number;
         let daysString = days == 0 ? '' : `${days} day${days > 1 ? 's' : ''} left`;
-        this.items.push({
+        items.push({
           //actualPrice: item['price'],
           //discount: item['price'],
           //left: item['price'],
@@ -88,7 +93,9 @@ export class ProfileComponent implements OnInit {
           name: item['title'],
           price: item['price'],
           imageUrl: this.sanitizer.bypassSecurityTrustResourceUrl(item['imageUrl']) as string,
-        })
+          productId: item['productId'],
+        });
+        this.items = items;
       }
     }, error => console.error(error));
   }

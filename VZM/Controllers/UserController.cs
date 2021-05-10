@@ -107,6 +107,7 @@ namespace VZM.Controllers
                               ActualPrice = prod.Price - prod.Price * discount.Value / 100, 
                               Discount = discount.Value,
                               Left = (discount.ExpiredAt - discount.CreatedAt).Days,
+                              ProductId = prod.ProductId,
                           };
 
                 return Ok(obj);
