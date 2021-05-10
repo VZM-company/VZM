@@ -18,6 +18,6 @@ namespace VZM.Interfaces
         public IEnumerable<Product> GetProductsByCategory(Category category);
         public IEnumerable<Product> GetProductsByUser(User user);
         public IEnumerable<Product> GetProductsBySeller(User user);
-        public IEnumerable<Product> GetTopProducts(int num);
+        //public IEnumerable<Product> GetTopProducts(int num);
     }
 }

@@ -54,5 +54,7 @@ namespace VZM.Controllers
             var product = _dataManager.Products.GetProduct(id);
             return Ok(product);
         }
+
+        // POST: api/priducts/{id}
     }
 }
