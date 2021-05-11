@@ -111,7 +111,12 @@ namespace VZM.Controllers
         [Route("top", Name ="Top")]
         public ActionResult<IEnumerable<Product>> Top()
         {
-            var obj = from prod in _dataManager.Products.GetProducts().Take(10)
+            return Ok(ModifyProduct(_dataManager.Products.GetProducts().Take(10)));
+        }
+
+        private dynamic ModifyProduct(IEnumerable<Product>products)
+        {
+            var obj = from prod in products
                       let discount = _dataManager.Discounts.GetDiscount(prod.ProductId)
                       select new
                       {
@@ -124,7 +129,7 @@ namespace VZM.Controllers
                           ProductId = prod.ProductId,
                       };
 
-            return Ok(obj);
+            return obj;
         }
 
     }
