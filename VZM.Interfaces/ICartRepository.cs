@@ -9,9 +9,10 @@ namespace VZM.Interfaces
 {
     public interface ICartRepository
     {
-        public IEnumerable<Product> GetCurrentCart();
-        public void Add(Product product);
-        public void Delete(Product product);
-        public void Purchase();
+        public IEnumerable<Product> GetItems(Guid userId);
+        public void Add(Guid productId, Guid userId);
+        public void DeleteProduct(Guid productId, Guid userId);
+        public void DeleteAll(Guid userId);
+        public void Purchase(Guid userId);
     }
 }
