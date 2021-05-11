@@ -53,12 +53,20 @@ export class UserService {
     /**
      * Whether the current user is a authenticated.
      */
-    isAuthenticated (): boolean {
-        if (this.getStoreParam('user') !== null) {
-            return true;
-        } else {
-            return false;
-        }
+    get isAuthenticated(): boolean {
+      if (this.getStoreParam('user') !== null && this.getStoreParam('user')['userId'] != '00000000-0000-0000-0000-000000000000') {
+          return true;
+      } else {
+          return false;
+      }
+    }
+
+    get isSeller(): boolean {
+      if (this.getStoreParam('user') !== null && this.getStoreParam('user')['role'] && this.getStoreParam('user')['role']['name'] == 'company') {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     /**

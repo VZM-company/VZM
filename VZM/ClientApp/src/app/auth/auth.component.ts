@@ -3,6 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { UserService } from '../services/user.service';
+import { MatDialog } from '@angular/material';
+import { AlertDialogComponent } from '../dialogs/alert-dialog/alert-dialog.component';
+import { Router } from '@angular/router';
 
 interface userModel {
   UserName: string;
@@ -33,22 +36,22 @@ export class AuthComponent implements OnInit {
     imageUrl: new FormControl(""),
   });
 
-  
-  api: HttpClient;
-  baseUrl: string;
-  userService: UserService;
   apiUrl: string;
 
   constructor(
     //api: HttpService,
-    api: HttpClient,
-    @Inject('BASE_URL') baseUrl: string,
-    userService: UserService
+    private api: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private userService: UserService,
+    private dialog: MatDialog,
+    private router: Router,
   ) {
     this.api = api;
     this.baseUrl = baseUrl;
     this.userService = userService;
     this.apiUrl = this.baseUrl + 'api/user';
+    this.dialog = dialog;
+    this.router = router;
 
     this.registerForm.get("username").setValue("username test");
     this.registerForm.get("password").setValue("123123");
@@ -67,6 +70,11 @@ export class AuthComponent implements OnInit {
       this.api.post(this.apiUrl + "/login", { "UserName": userName, "Password": password }).subscribe(result => {
         console.log(result);
         this.userService.setUser(result)
+        if (result == null) {
+          this.dialog.open(AlertDialogComponent, { data: { title: "Authentication error", description: "Wrong credentials" } });
+        } else {
+          this.router.navigate(['/']);
+        }
       }, error => console.error(error));
     }
   }
@@ -95,7 +103,10 @@ export class AuthComponent implements OnInit {
 
     if (this.registerForm.valid) {
       this.api.post(this.apiUrl + "/register", { ...newUser }).subscribe(result => {
-        console.log(result);
+        let ref = this.dialog.open(AlertDialogComponent, { data: { title: "Authentication", description: "You've registrated successfully!" } });;
+        ref.afterClosed().subscribe(() => {
+          this.router.navigate(["/"]);
+        })
         this.userService.setUser(result)
       }, error => console.error(error));
     }

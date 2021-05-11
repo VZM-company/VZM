@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
     name: "шутан",
     value: "shooter"
   }, {
-      name: "Эр пэ гэ",
+      name: "rpg",
       value: "rpg"
     },];
 

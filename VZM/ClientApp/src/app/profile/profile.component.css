@@ -20,6 +20,7 @@
   border-radius: 50%;
   width: 200px;
   height: 200px;
+  overflow: hidden;
 }
 
 .profile-item__image img {
@@ -97,6 +98,17 @@
   width: 30%;
   margin: 10px;
   padding: 0;
+  position: relative;
+}
+
+.app-card__delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.app-card__delete:hover {
+    color: red;
 }
 
 .app-card__image {
@@ -134,7 +146,7 @@
 .description__price {
   color: gray;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   font-size: 14px;
 }
 

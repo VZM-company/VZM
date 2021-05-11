@@ -12,7 +12,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Price</mat-label>
-        <input type="number" required matInput formControlName="price" name="price">
+        <input required matInput formControlName="price" name="price">
       </mat-form-field>
       <mat-form-field>
         <mat-label>Description</mat-label>
@@ -22,10 +22,6 @@
         <mat-label>DescriptionShort</mat-label>
         <input required matInput formControlName="descriptionShort" name="descriptionShort">
       </mat-form-field>
-      <!--<mat-form-field>
-    <mat-label>Image</mat-label>
-    <input required matInput formControlName="image" name="image">
-  </mat-form-field>-->
       <mat-card class="image">
         <label *ngIf="productForm.get('imageUrl').value == ''" for="imageUrl">Choose image</label>
         <img *ngIf="productForm.get('imageUrl').value != ''" [src]="productForm.get('imageUrl').value" alt="Product image" />
@@ -33,7 +29,8 @@
       </mat-card>
       <input (change)="uploadImage($event.target.files[0])" id="imageUrl" style="visibility: hidden;" type="file" name="name" value="" />
 
-      <button mat-stroked-button color="primary" type="submit">{{product.id ? "Update" : "Create"}}</button>
+      <button mat-stroked-button color="primary" type="submit">Save</button>
+
     </form>
   </mat-card>
 </section>

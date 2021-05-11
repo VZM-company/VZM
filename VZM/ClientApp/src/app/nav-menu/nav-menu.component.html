@@ -4,51 +4,49 @@
   >
     <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">VZM</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
+      
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+           [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
             <a mat-flat-button color="basic" class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/counter']">Counter</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/app-detail']">App detail</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/auth']">Auth</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/cart']">Cart</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/profile']">Profile</a>
-          </li>
+          <!--<li class="nav-item" [routerLinkActive]="['link-active']" >
+        <a mat-flat-button color="basic" [routerLink]="['/app-detail']">App detail</a>
+      </li>-->
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a mat-flat-button color="basic" [routerLink]="['/search']">Search</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/profile/create']">Product Create</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a mat-flat-button color="basic" [routerLink]="['/fetch-data']">Fetch data</a>
-          </li>
+          <ng-container *ngIf="isAuthenticated">
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a mat-flat-button color="basic" [routerLink]="['/profile']">Profile</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isSeller">
+              <a mat-flat-button color="basic" [routerLink]="['/cart']">Cart</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isSeller">
+              <a mat-flat-button color="basic" [routerLink]="['/profile/create']">Product Create</a>
+            </li>
+            <li class="nav-item">
+              <button mat-flat-button color="basic" (click)="logout()">Log out</button>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="!isAuthenticated">
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a mat-flat-button color="basic" [routerLink]="['/auth']">Auth</a>
+            </li>
+          </ng-container>
         </ul>
       </div>
     </div>

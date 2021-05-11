@@ -35,11 +35,10 @@ export class HomeComponent implements OnInit {
 
   items_other = this.items;
 
-  userService: UserService;
   constructor(
-    userService: UserService
+    private userService: UserService
   ) {
-    this.userService = userService;
+
   }
 
   ngOnInit(): void {

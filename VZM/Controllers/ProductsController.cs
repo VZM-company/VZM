@@ -38,7 +38,7 @@ namespace VZM.Controllers
         public IActionResult Delete(Guid id)
         {
             var product = _dataManager.Products.GetProduct(id);
-            if (product.ProductId == default)
+            if (product.ProductId != default)
             {
                 _dataManager.Products.DeleteProduct(id);
             }

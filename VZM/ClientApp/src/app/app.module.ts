@@ -7,9 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatFormFieldControl, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressSpinner, MatProgressSpinnerModule, MatSelectModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldControl, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressSpinner, MatProgressSpinnerModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { AppDetailComponent } from './app-detail/app-detail';
 import { AuthComponent } from './auth/auth.component'
 import { CartComponent } from './cart/cart.component';
@@ -18,19 +17,27 @@ import { SearchComponent } from './search/search.component';
 import { UserService } from './services/user.service';
 import { AppStorageService } from './core/app-storage.service';
 import { ProductComponent } from './product/product.component';
+import { AlertDialogComponent } from './dialogs/alert-dialog/alert-dialog.component';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     AppDetailComponent,
     AuthComponent,
     CartComponent,
     ProfileComponent,
     SearchComponent,
     ProductComponent,
+
+    AlertDialogComponent,
+    ConfirmDialogComponent
+  ],
+  entryComponents: [
+    AlertDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,7 +45,6 @@ import { ProductComponent } from './product/product.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
       { path: 'app-detail', component: AppDetailComponent },
       { path: 'auth', component: AuthComponent },
       { path: 'cart', component: CartComponent },
@@ -55,7 +61,8 @@ import { ProductComponent } from './product/product.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   providers: [UserService, AppStorageService],
   bootstrap: [AppComponent]
