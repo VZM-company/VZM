@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using VZM.Data;
 using VZM.Entities;
 using System;
+using VZM.ViewModels;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace VZM.Controllers
 {
@@ -72,6 +75,35 @@ namespace VZM.Controllers
             }
 
             return Ok(product);
+        }
+
+        // GET: api/products/find
+        [HttpGet]
+        [Route("find")]
+        public ActionResult<IEnumerable<Product>> Get()
+        {
+            var fpvm = new FindProductViewModel
+            {
+                Title = HttpContext.Request.Query["title"],
+                StartPrice = float.Parse(HttpContext.Request.Query["startPrice"].ToString()),
+                EndPrice = float.Parse(HttpContext.Request.Query["endPrice"].ToString()),
+                Category = HttpContext.Request.Query["category"],
+            };
+
+            IEnumerable<Product> products = null;
+            if (fpvm.Category != "undefined")
+            {
+                var cat = _dataManager.Categories.GetCategoryByName(fpvm.Category);
+                products = _dataManager.Products.GetProductsByCategory(cat);
+            }
+
+            products ??= _dataManager.Products.GetProducts();
+
+            fpvm.EndPrice = fpvm.EndPrice == 0 ? int.MaxValue : fpvm.EndPrice;
+
+            products = products.Where(x => x.Price >= fpvm.StartPrice && x.Price <= fpvm.EndPrice && x.Title.Contains(fpvm.Title));
+
+            return Ok(products);
         }
     }
 }
