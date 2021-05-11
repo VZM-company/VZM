@@ -3,7 +3,6 @@ import { Component, Inject, OnInit, Sanitizer } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { error } from 'console';
 import { AlertDialogComponent } from '../dialogs/alert-dialog/alert-dialog.component';
 import { UserService } from '../services/user.service';
 
