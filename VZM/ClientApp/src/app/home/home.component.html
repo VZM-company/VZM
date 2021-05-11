@@ -1,28 +1,14 @@
-<h1>Специальные предложения</h1>
+<h1>Новинки</h1>
 <div class="app-cards">
+  <mat-spinner *ngIf="loading" style="justify-self: center"></mat-spinner>
   <mat-card class="app-card" *ngFor="let item of items; let i = index">
     <div class="app-card__image">
-      <!--<img src="#" alt="Alternate Text" />-->
+      <img [src]="item.imageUrl" alt="Alternate Text" />
     </div>
-    <div class="app-card__description">
+    <div class="app-card__description" (click)="toDetail(item.productId)">
       <span class="description__name">{{item.name}}</span> <br />
-      <span class="description__price">PRICE: <span class="description__price-discount">{{item.price}}</span> <strong class="description__actualPrice">{{item.actualPrice}}</strong></span>
-      <span class="description__left">LEFT: {{item.left}}</span>
+      <span class="description__price">PRICE: <span *ngIf="item.left > 0" class="description__price-discount">{{item.price}}</span> <strong class="description__actualPrice">{{item.actualPrice}}</strong></span>
+      <span *ngIf="item.left > 0" class="description__left">LEFT: {{item.left}}</span>
     </div>
   </mat-card>
 </div>
-
-<h1>Популярное</h1>
-<div class="app-cards">
-  <mat-card class="app-card" *ngFor="let item of items_other; let i = index">
-    <div class="app-card__image">
-      <!--<img src="#" alt="Alternate Text" />-->
-    </div>
-    <div class="app-card__description">
-      <span class="description__name">{{item.name}}</span> <br />
-      <span class="description__price">PRICE: <span class="description__price-discount">{{item.price}}</span> <strong class="description__actualPrice">{{item.actualPrice}}</strong></span>
-      <span class="description__left">LEFT: {{item.left}}</span>
-    </div>
-  </mat-card>
-</div>
-

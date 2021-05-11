@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -9,31 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class SearchComponent implements OnInit {
 
-  items = [{
-    name: "qwer",
-    price: 132,
-    actualPrice: 120,
-    left: '12:21',
-    discount: 10
-  }, {
-    name: "rewfasdv",
-    price: 121,
-    actualPrice: 115,
-    left: '20:30',
-    discount: 5
-  }, {
-    name: "aegaerg",
-    price: 152,
-    actualPrice: 135,
-    left: '12:00',
-    discount: 12
-  }, {
-    name: "asfawer",
-    actualPrice: 460,
-    price: 412,
-    left: '10:11',
-    discount: 11
-    }];
+  items = [];
   
   searchForm = new FormGroup({
     startPrice: new FormControl(""),
@@ -55,9 +33,11 @@ export class SearchComponent implements OnInit {
   constructor(
     private userService: UserService,
     private api: HttpClient,
+    private sanitizer: DomSanitizer,
     @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,
   ) {
-    
+    this.findByUrl(this.baseUrl + 'api/products/top');
   }
 
   timeout: any = null;
@@ -74,15 +54,61 @@ export class SearchComponent implements OnInit {
 
   search() {
     let queryString = new URLSearchParams({
-      startPrice: this.searchForm.get("startPrice").value,
-      category: this.searchForm.get("category").value,
-      endPrice: this.searchForm.get("endPrice").value,
-      title: this.searchForm.get("title").value,
+      startPrice: this.searchForm.get("startPrice").value ? this.searchForm.get("startPrice").value : 0,
+      category: this.searchForm.get("category").value ? this.searchForm.get("category").value : undefined,
+      endPrice: this.searchForm.get("endPrice").value ? this.searchForm.get("endPrice").value : 0,
+      title: this.searchForm.get("title").value ? this.searchForm.get("title").value : '',
     }).toString();
-    
-    this.api.get(this.baseUrl + 'api/products/find?' + queryString).subscribe(res => {
-      console.log("result from api/products/find is ", res)
-    }, error => console.error(error))
+    this.findByUrl(this.baseUrl + 'api/products/find?' + queryString);
+    //this.api.get(this.baseUrl + 'api/products/find?' + queryString).subscribe(result => {
+    //  let items: any[] = [];
+    //  for (let item of result as []) {
+    //    let days = item['left'] as number;
+
+    //    let daysString = days == 0 ? '' : `${days} day${days > 1 ? 's' : ''} left`;
+    //    items.push({
+    //      actualPrice: item['actualPrice'],
+    //      discount: item['discount'],
+    //      left: daysString,
+    //      name: item['name'],
+    //      price: item['price'],
+    //      imageUrl: this.sanitizer.bypassSecurityTrustResourceUrl(item['imageUrl']) as string,
+    //      productId: item['productId'],
+    //    });
+    //    this.items = items;
+    //  }
+    //}, error => console.error(error))
+  }
+
+  findByUrl(url) {
+    this.loading = true;
+    this.items = [];
+    this.api.get(url).subscribe(result => {
+      let items = [];
+      for (let item of result as []) {
+        let days = item['left'] as number;
+        let daysString = days == 0 ? '' : `${days} day${days > 1 ? 's' : ''} left`;
+        console.log(item);
+
+        items.push({
+          actualPrice: item['actualPrice'],
+          discount: item['discount'],
+          left: daysString,
+          name: item['name'],
+          price: item['price'],
+          imageUrl: this.sanitizer.bypassSecurityTrustResourceUrl(item['imageUrl']) as string,
+          productId: item['productId'],
+        });
+      }
+      this.items = items;
+    }, error => console.error(error), () => { this.loading = false})
+  }
+
+  toDetail(productId) {
+    console.log()
+    if (productId) {
+      this.router.navigate(["/app-detail", productId]);
+    }
   }
 
   ngOnInit(): void {

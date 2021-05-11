@@ -9,13 +9,19 @@
     align-items: center;
 }
 
+section {
+  display: flex;
+  justify-content: center;
+}
+
 .app__images {
   padding: 0;
-  overflow: scroll;
-  overflow-y: hidden;
   height: 300px;
-
   display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  width: 300px;
 }
 
 .app__detail {

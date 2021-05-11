@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit, Sanitizer } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertDialogComponent } from '../dialogs/alert-dialog/alert-dialog.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -6,41 +12,57 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-detail.css']
 })
 export class AppDetailComponent implements OnInit {
-  app: {
+  item: {
     title: string,
     description: string,
     price: number,
     discount: number,
-    images: string[],
-    actualPrice: number
+    imageUrl: string,
+    actualPrice: number,
+    left: string,
+    productId: number,
   };
 
-  slides: string[];
-  currentSlide: number;
-
-  getSlide() {
-    return this.slides[this.currentSlide];
-  }
-
-  getPrev() {
-    this.currentSlide = this.currentSlide === 0 ? 0 : this.currentSlide - 1;
-  }
-  
-  getNext() {
-    this.currentSlide = this.currentSlide === this.slides.length ? this.currentSlide : this.currentSlide + 1;
-  }
+  loading = false;
 
   constructor(
-
+    private api: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService,
+    private dialog: MatDialog,
+    private router: Router,
+    private sanitizer: DomSanitizer,
   ) {
-    this.app = {
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      discount: 5,
-      images: ['qwerqwer.png', 'tqertqw.png', 'eqwerqwer.png', 'dqwerqwer.png',],
-      price: 120,
-      title: "This War of Mine",
-      actualPrice: 120 - ((5 / 100) * 120)
-    }
+    this.loading = true;
+    this.activatedRoute.params.subscribe(params => {
+      this.api.get(this.baseUrl + 'api/products/' + params['id']).subscribe(item => {
+        let days = item['left'] as number;
+        let daysString = days == 0 ? '' : `${days} day${days > 1 ? 's' : ''} left`;
+
+        this.item = {
+          actualPrice: item['actualPrice'],
+          discount: item['discount'],
+          left: daysString,
+          title: item['title'],
+          price: item['price'],
+          description: item['description'],
+          imageUrl: this.sanitizer.bypassSecurityTrustResourceUrl(item['imageUrl']) as string,
+          productId: item['productId'],
+        }
+      }, error => console.error(error), () => { this.loading = false})
+    })
+  }
+
+  addToCart() {
+    //this.api.post()
+  }
+
+  toAuthPage() {
+    let ref = this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "You need to be authenticated first!" } })
+    ref.afterClosed().subscribe(() => {
+      this.router.navigate(['/auth']);
+    })
   }
 
 

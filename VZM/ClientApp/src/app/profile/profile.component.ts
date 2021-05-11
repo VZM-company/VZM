@@ -45,7 +45,11 @@ export class ProfileComponent implements OnInit {
   }
 
   toDetail(ProductId) {
-    this.router.navigate(['/profile/', ProductId]);
+    if (this.userService.isSeller) {
+      this.router.navigate(['/profile/', ProductId]);
+    } else {
+      this.router.navigate(['/app-detail/', ProductId]);
+    }
   }
 
   delete(ProductId) {

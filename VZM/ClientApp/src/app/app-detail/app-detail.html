@@ -1,28 +1,26 @@
-<section>
+<section *ngIf="item != null">
   <mat-card class="app__images">
-    <!--<img src="#" alt="Alternate Text" />-->
-    <div class="app__image" *ngFor="let image of app.images">
-      some picture
-    </div>
+    <img class="app__image" [src]="item.imageUrl" alt="Image" />
   </mat-card>
 </section>
 <section class="app__detail">
   <article class="detail__info">
-    <h2 class="info__title">{{app.title}}</h2>
-    <p class="info__description">{{app.description}}</p>
+    <h2 class="info__title">{{item.title}}</h2>
+    <p class="info__description">{{item.descriptionShort}}</p>
+    <p class="info__description">{{item.description}}</p>
   </article>
   <article class="detail__buy">
     <div class="detail__price">
-      <mat-card class="price__discount">
-        <span>-{{app.discount}}%</span>
+      <mat-card class="price__discount" *ngIf="item.discount > 0">
+        <span>-{{item.discount}}%</span>
       </mat-card>
-      <span class="price">{{app.price}} BYN</span>
-      <span class="price__actual">{{app.actualPrice}} BYN</span>
+      <span class="price">{{item.actualPrice}} BYN</span>
+      <span class="price__actual">{{item.price}} BYN</span>
     </div>
     <div class="detail__cart">
-      <button class="add-to-cart" mat-stroked-button>Add to cart</button>
+      <button *ngIf="userService.isAuthenticated && !userService.isSeller" (click)="addToCart()" class="add-to-cart" mat-stroked-button>Add to cart</button>
+      <button *ngIf="!userService.isAuthenticated" (click)="toAuthPage()" type="button" class="add-to-cart" mat-stroked-button>Add to cart</button>
     </div>
   </article>
 </section>
-
-
+<mat-spinner *ngIf="loading"></mat-spinner>

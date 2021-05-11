@@ -45,7 +45,7 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'app-detail', component: AppDetailComponent },
+      { path: 'app-detail/:id', component: AppDetailComponent },
       { path: 'auth', component: AuthComponent },
       { path: 'cart', component: CartComponent },
       { path: 'profile', component: ProfileComponent },

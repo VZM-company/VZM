@@ -103,7 +103,7 @@ namespace VZM.Controllers
 
             products = products.Where(x => x.Price >= fpvm.StartPrice && x.Price <= fpvm.EndPrice && x.Title.Contains(fpvm.Title));
 
-            return Ok(products);
+            return Ok(ModifyProduct(products));
         }
 
         // GET: api/products/top
