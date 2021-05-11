@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { AlertDialogComponent } from '../dialogs/alert-dialog/alert-dialog.component';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class CartComponent implements OnInit {
 
   total: number = 0;
 
+  loading = false
+
   constructor(
     private api: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
@@ -24,9 +27,9 @@ export class CartComponent implements OnInit {
     private router: Router,
     private sanitizer: DomSanitizer,
   ) {
-    this.total = this.items.reduce((prev, next) => { next.price = prev.price + next.price; return next }).price;
-    this.api.get(this.baseUrl + 'api/products/top').subscribe(result => {
-      console.log("result from api/products/find is ", result)
+    this.total = 0;
+    this.loading = true;
+    this.api.get(this.baseUrl + 'api/cart').subscribe(result => {
       let items: any[] = [];
       for (let item of result as []) {
         let days = item['left'] as number;
@@ -42,12 +45,26 @@ export class CartComponent implements OnInit {
           productId: item['productId'],
         });
         this.items = items;
+        this.total = this.items.reduce((prev, next) => { next.price = prev.price + next.price; return next }).price;
       }
-    }, error => console.error(error))
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+      console.error(error)
+    })
   }
 
-  pay() {
-
+  purchase() {
+    this.loading = true
+    this.api.post(this.baseUrl + 'api/cart/purchase', {}).subscribe(result => {
+      this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Purchased!" } });
+    }, error => {
+      this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Error!" } });
+    this.loading = true
+      console.error(error)
+    }, () => {
+        this.loading = false;
+    })
   }
 
   ngOnInit(): void {
