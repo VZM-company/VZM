@@ -11,19 +11,4 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title = 'app';
-
-  constructor(
-    private userService: UserService,
-    private api: HttpClient,
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    @Inject('BASE_URL') private baseUrl: string,
-  ) {
-    if (this.userService.isAuthenticated) {
-      let user = this.userService.getUser();
-      this.api.post(this.baseUrl + "api/user/login", { "UserName": user['userName'], "Password": user['passwordHash'] }).subscribe(result => {
-        router.navigate(["/"]);
-      }, error => console.error(error));
-    }
-  }
 }
