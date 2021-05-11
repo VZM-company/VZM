@@ -105,5 +105,27 @@ namespace VZM.Controllers
 
             return Ok(products);
         }
+
+        // GET: api/products/top
+        [HttpGet]
+        [Route("top", Name ="Top")]
+        public ActionResult<IEnumerable<Product>> Top()
+        {
+            var obj = from prod in _dataManager.Products.GetProducts().Take(10)
+                      let discount = _dataManager.Discounts.GetDiscount(prod.ProductId)
+                      select new
+                      {
+                          Name = prod.Title,
+                          Price = prod.Price,
+                          ImageUrl = prod.ImageUrl,
+                          ActualPrice = prod.Price - prod.Price * discount.Value / 100,
+                          Discount = discount.Value,
+                          Left = (discount.ExpiredAt - discount.CreatedAt).Days,
+                          ProductId = prod.ProductId,
+                      };
+
+            return Ok(obj);
+        }
+
     }
 }
