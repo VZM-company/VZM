@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+
+export interface findProductModel {
+  startPrice: number | string,
+  endPrice: number | string,
+  title: string,
+  category: string | null,
+}
 
 @Component({
   selector: 'app-home',
@@ -36,9 +44,11 @@ export class HomeComponent implements OnInit {
   items_other = this.items;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private api: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
   ) {
-
+    
   }
 
   ngOnInit(): void {
