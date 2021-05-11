@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, Sanitizer } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { error } from 'console';
 import { AlertDialogComponent } from '../dialogs/alert-dialog/alert-dialog.component';
 import { UserService } from '../services/user.service';
 
@@ -55,7 +56,17 @@ export class AppDetailComponent implements OnInit {
   }
 
   addToCart() {
-    //this.api.post()
+    this.loading = true;
+    this.api.post(this.baseUrl + 'api/cart/add', { ProductId: this.item.productId }).subscribe(res => {
+      let ref = this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Added to cart successfully!" } });
+      ref.afterClosed().subscribe(() => {
+        this.router.navigate(["/cart"]);
+      })
+    }, error => {
+        console.error(error)
+        this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Error happened while adding to cart!" } });
+        this.loading = false
+    }, () => { this.loading = false })
   }
 
   toAuthPage() {

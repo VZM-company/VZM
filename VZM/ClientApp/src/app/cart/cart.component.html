@@ -1,23 +1,22 @@
 <section class="container">
   <h1>Cart</h1>
-  <mat-card class="cart-item" *ngFor="let item of items">
-    <div class="cart-item__image">
-      <!--<img src="#" alt="Alternate Text" />-->
-    </div>
-    <article class="detail__buy">
-      <h2>{{item.name}}</h2>
-      <div class="detail__price">
-        <mat-card class="price__discount">
-          <span>-{{item.discount}}%</span>
-        </mat-card>
-        <span class="price">{{item.price}} BYN</span>
-        <span class="price__actual">{{item.actualPrice}} BYN</span>
+  <div class="app-cards">
+    <mat-spinner *ngIf="loading" style="justify-self: center"></mat-spinner>
+    <mat-card class="app-card" *ngFor="let item of items; let i = index">
+      <div class="app-card__image">
+        <img [src]="item.imageUrl" alt="Alternate Text" />
       </div>
-    </article>
-  </mat-card>
+      <div class="app-card__description" (click)="toDetail(item.productId)">
+        <span class="description__name">{{item.name}}</span> <br />
+        <span class="description__price">PRICE: <span *ngIf="item.left > 0" class="description__price-discount">{{item.price}}</span> <strong class="description__actualPrice">{{item.actualPrice}}</strong></span>
+        <span *ngIf="item.left > 0" class="description__left">LEFT: {{item.left}}</span>
+      </div>
+    </mat-card>
+  </div>
+
 
   <div class="cart-buy">
     <h2>TOTAL: {{total}} BYN</h2>
-    <button class="buy-button" href="#" mat-stroked-button color="primary">PAY</button>
+    <button class="buy-button" (click)="pay()" mat-stroked-button color="primary">PAY</button>
   </div>
 </section>
