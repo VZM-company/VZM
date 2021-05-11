@@ -28,11 +28,11 @@ export class HomeComponent implements OnInit {
     private sanitizer: DomSanitizer,
     @Inject('BASE_URL') private baseUrl: string,
   ) {
-    if (this.userService.isAuthenticated) {
-      let user = this.userService.getUser();
-      this.api.post(this.baseUrl + "api/user/login", { "UserName": user['userName'], "Password": user['passwordHash'] }).subscribe(result => {
-      }, error => console.error(error));
-    }
+    //if (this.userService.isAuthenticated) {
+    //  let user = this.userService.getUser();
+    //  this.api.post(this.baseUrl + "api/user/login", { "UserName": user['userName'], "Password": user['passwordHash'] }).subscribe(result => {
+    //  }, error => console.error(error));
+    //}
 
     this.api.get(this.baseUrl + 'api/products/top').subscribe(result => {
       console.log("result from api/products/find is ", result)
