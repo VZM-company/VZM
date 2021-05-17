@@ -24,7 +24,7 @@ namespace VZM.Controllers
         public IActionResult Post(Product p)
         {
             var uId = _dataManager.AuthorizedUser?.UserId;
-            if ( uId != null)
+            if (uId != null)
             {
                 try
                 {
