@@ -68,12 +68,14 @@
     <Build Include="Tables\Category.sql" />
     <Build Include="Tables\Cart.sql" />
     <Build Include="Tables\Discount.sql" />
+    <Build Include="Tables\Journal.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Db.publish.xml" />
     <None Include="Scripts\Roles.sql" />
     <None Include="Scripts\Users.sql" />
     <None Include="Scripts\Products.sql" />
+    <None Include="Tables\TrProduct.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />
