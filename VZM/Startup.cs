@@ -38,6 +38,7 @@ namespace VZM
             services.AddTransient<IDiscountRepository, DiscountRepository>();
             services.AddTransient<DataManager>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICartRepository, CartRepository>();
             services.AddSingleton<AuthorizedUser>();
         }
 

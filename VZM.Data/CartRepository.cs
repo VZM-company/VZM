@@ -21,8 +21,10 @@ namespace VZM.Data
 
         public void Add(Guid productId, Guid userId)
         {
-            var sql = "INSERT INTO Cart(UserId, ProductId) VALUES(@UserId, @ProductId)";
+            var sql0 = "SELECT COUNT(*) FROM Cart WHERE UserId=@UserId AND ProductId=@ProductId";
+            var cmd0 = new SqlCommand(sql0, _connection);
 
+            var sql = "INSERT INTO Cart(UserId, ProductId) VALUES(@UserId, @ProductId)";
             var cmd = new SqlCommand(sql, _connection);
 
             cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
@@ -31,8 +33,23 @@ namespace VZM.Data
             cmd.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
             cmd.Parameters["@ProductId"].Value = productId;
 
+            cmd0.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier);
+            cmd0.Parameters["@UserId"].Value = userId;
+
+            cmd0.Parameters.Add("@ProductId", SqlDbType.UniqueIdentifier);
+            cmd0.Parameters["@ProductId"].Value = productId;
+
             _connection.Open();
-            cmd.ExecuteNonQuery();
+            if ((int)cmd0.ExecuteScalar() == 0)
+            {
+                cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                _connection.Close();
+                throw new ArgumentException();
+            }
+
             _connection.Close();
         }
 
