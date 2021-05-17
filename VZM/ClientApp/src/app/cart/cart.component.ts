@@ -59,7 +59,7 @@ export class CartComponent implements OnInit {
     this.api.post(this.baseUrl + 'api/cart/purchase', {}).subscribe(result => {
       this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Purchased!" } });
     }, error => {
-      this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Error!" } });
+      this.dialog.open(AlertDialogComponent, { data: { title: "Cart action", description: "Error happened while purchasing!" } });
     this.loading = true
       console.error(error)
     }, () => {
