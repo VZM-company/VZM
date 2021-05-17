@@ -53,6 +53,13 @@ namespace VZM.Controllers
             };
 
             _dataManager.Users.SaveUser(newUser);
+
+            user = _dataManager.Users.GetUserByUsername(newUser.UserName);
+            if(user != null)
+            {
+                _dataManager.AuthorizedUser.UserId = user.UserId;
+            }
+
             return Ok(newUser);
         }
 
